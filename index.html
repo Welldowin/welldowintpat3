@@ -31,14 +31,21 @@
         #02081d;
     }
     .start-box { text-align: center; }
-    .start-logo {
-      width: 540px;
-      max-width: 78vw;
-      display: block;
-      margin: 0 auto 22px;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.55));
-    }
+    .start-logo-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 420px; /* ปรับได้ */
+  max-width: 90vw;
+
+  opacity: 0.25; /* ให้จาง ๆ */
+  z-index: 0;
+
+  pointer-events: none;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
+}
     .start-btn-main {
       font-size: 24px;
       padding: 14px 36px;
@@ -791,9 +798,10 @@
 
   <div id="startOverlay" class="start-overlay">
     <div class="start-box">
-      <img src="./assets/logo.png" alt="Battle of Fortune logo" class="start-logo">
-      <button class="start-btn-main" onclick="startGame()">เริ่มเกม</button>
-    </div>
+  <img src="./assets/logo.png" class="start-logo-bg">
+
+  <button class="start-btn-main">เริ่มเกม</button>
+</div>
   </div>
 
   <script>
