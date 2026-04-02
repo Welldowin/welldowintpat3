@@ -32,13 +32,16 @@
     }
     .start-box { text-align: center; }
     .start-logo {
-      width: 540px;
-      max-width: 78vw;
-      display: block;
-      margin: 0 auto 22px;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.55));
-    }
+  width: 780px;        /* ขยายโลโก */
+  max-width: 92vw;     /* กันล้นจอมือถือ */
+  display: block;
+  margin: 0 auto 28px; /* เว้นระยะจากปุ่ม */
+  object-fit: contain;
+
+  filter: drop-shadow(0 14px 40px rgba(0,0,0,0.6));
+
+  animation: logoBreath 3s ease-in-out infinite;
+}
     .start-btn-main {
       font-size: 24px;
       padding: 14px 36px;
@@ -650,7 +653,10 @@
         display: flex;
       }
     }
-
+@keyframes logoBreath {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
   </style>
 </head>
 <body>
