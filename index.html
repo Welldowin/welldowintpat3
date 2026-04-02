@@ -526,17 +526,139 @@
     .leader-footer { margin-top: 18px; text-align: center; }
 
     @media (max-width: 900px) {
-      .char-grid, .leader-columns { grid-template-columns: 1fr; }
-      .battle-topbar { grid-template-columns: 1fr; }
-      .arena { padding: 16px 4vw 220px; }
-      .fighter { width: 40%; height: 60%; }
-      .vs-text { font-size: 28px; }
-      .turn-counter { font-size: 18px; }
-      .card-slot { width: 96px; height: 118px; }
-      .action-panel { right: 12px; bottom: 18px; }
-      .action-btn { min-width: 140px; font-size: 14px; padding: 10px 12px; }
-      .log-box { width: min(560px, 92vw); }
-      .start-logo { width: 260px; }
+      .select-screen {
+        padding: 8px;
+      }
+      .select-box {
+        max-width: min(1120px, 100%);
+        max-height: calc(100dvh - 16px);
+        padding: 10px;
+        border-radius: 18px;
+      }
+      .select-title {
+        margin-bottom: 10px;
+      }
+      .select-title h1 {
+        font-size: 22px;
+        line-height: 1.15;
+        margin: 0 0 6px;
+      }
+      .select-title p {
+        font-size: 12px;
+        line-height: 1.3;
+        margin: 0;
+      }
+      .char-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+      }
+      .char-card {
+        padding: 8px 6px;
+        border-radius: 14px;
+      }
+      .char-card img {
+        max-width: 100px;
+        height: 108px;
+        margin-bottom: 4px;
+      }
+      .char-card h3 {
+        font-size: 16px;
+        line-height: 1.05;
+        margin: 4px 0;
+      }
+      .char-card p {
+        font-size: 10px;
+        line-height: 1.2;
+        margin: 3px 0;
+      }
+      .status-box {
+        top: 10px;
+        width: min(28vw, 156px);
+        padding: 8px 9px;
+        border-radius: 12px;
+      }
+      .status-box.player-panel { left: 10px; }
+      .status-box.boss-panel { right: 10px; }
+      .status-name { font-size: 13px; margin-bottom: 4px; }
+      .status-line { font-size: 10px; margin: 3px 0 2px; }
+      .bar-wrap { height: 8px; margin-bottom: 4px; }
+      .center-ui { top: 8px; gap: 4px; }
+      .turn-counter { font-size: 14px; padding: 6px 12px; }
+      .vs-text { font-size: 24px; }
+      .arena { padding: 70px 15vw 128px; }
+      .fighter {
+        width: min(30vw, 190px);
+        height: min(60dvh, 250px);
+        min-height: 200px;
+      }
+      .battle-bottom {
+        min-height: 122px;
+        padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+      }
+      .cards-title { font-size: 13px; }
+      .card-slots { gap: 8px; }
+      .card-slot {
+        width: clamp(76px, 18vw, 88px);
+        height: 96px;
+        padding: 6px 4px;
+      }
+      .card-slot .icon { font-size: 30px; margin-bottom: 4px; }
+      .card-slot .label { font-size: 12px; }
+      .card-slot .hint { font-size: 10px; margin-top: 3px; }
+      .action-panel {
+        right: 10px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        gap: 8px;
+      }
+      .action-btn {
+        min-width: 108px;
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      .log-box {
+        left: 10px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        width: min(38vw, 280px);
+        height: 48px;
+        font-size: 11px;
+      }
+      .boss-reveal-card {
+        width: clamp(68px, 16vw, 86px);
+        height: clamp(84px, 20vw, 104px);
+      }
+      .boss-reveal-front .boss-mark,
+      .boss-reveal-back .icon {
+        font-size: 28px;
+        margin-bottom: 4px;
+      }
+      .boss-reveal-front .boss-name,
+      .boss-reveal-back .label {
+        font-size: 11px;
+      }
+      .leaderboard-screen { padding: 10px; }
+      .leaderboard-box {
+        width: min(1160px, 100%);
+        height: min(94dvh, 560px);
+        padding: 12px;
+      }
+      .leaderboard-box h1 { font-size: 20px; margin: 0 0 8px; text-align: center; }
+      .leaderboard-box > p { font-size: 12px; margin: 0 0 10px; }
+      .leader-columns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .leader-column { padding: 10px; min-height: 0; overflow: auto; }
+      .leader-column h3 { font-size: 14px; margin: 0 0 8px; text-align: center; }
+      .leader-item { font-size: 11px; padding: 7px 8px; }
+      .leader-footer { margin-top: 10px; }
+      .start-logo { width: min(88vw, 620px); }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) {
+      .boss-reveal-card {
+        width: clamp(74px, 15vw, 92px);
+        height: clamp(90px, 18vw, 110px);
+      }
     }
 
     .orientation-overlay {
@@ -1015,14 +1137,15 @@
 
       const layerRect = layer.getBoundingClientRect();
       const slotRect = slot.getBoundingClientRect();
-      const cardWidth = card.offsetWidth || 120;
       const cardHeight = card.offsetHeight || 140;
       const centerX = slotRect.left - layerRect.left + (slotRect.width / 2);
-      const gapAboveSlot = 22;
+      const isMobile = window.matchMedia('(max-width: 900px)').matches;
+      const minTop = isMobile ? 72 : 96;
+      const gapAboveSlot = isMobile ? 34 : 22;
       const top = slotRect.top - layerRect.top - cardHeight - gapAboveSlot;
 
       card.style.left = `${centerX}px`;
-      card.style.top = `${Math.max(96, top)}px`;
+      card.style.top = `${Math.max(minTop, top)}px`;
     }
 
     async function revealBossCard(slotIndex, bossCard) {
