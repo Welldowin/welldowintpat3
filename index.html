@@ -52,10 +52,11 @@
     }
 
     .select-screen {
-      padding: 24px;
+      padding: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
       background:
         linear-gradient(rgba(10, 14, 28, 0.68), rgba(10, 14, 28, 0.78)),
         url('./assets/select-bg.png') center center / cover no-repeat;
@@ -63,12 +64,14 @@
     .select-box {
       width: 100%;
       max-width: 1120px;
+      max-height: calc(100dvh - 28px);
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 24px;
-      padding: 24px;
+      padding: 20px;
       backdrop-filter: blur(10px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
     }
     .select-title { text-align: center; margin-bottom: 20px; }
     .select-title p { color: #d7deef; }
@@ -361,7 +364,10 @@
     .surrender-btn { background: linear-gradient(135deg, #991b1b, #dc2626); }
 
     .log-box {
-      width: min(720px, 74vw);
+      position: absolute;
+      left: 18px;
+      bottom: 12px;
+      width: min(420px, 28vw);
       height: 56px;
       overflow-y: auto;
       background: rgba(255,255,255,0.08);
@@ -471,44 +477,50 @@
     @media (max-width: 900px) {
       .leader-columns { grid-template-columns: 1fr; }
       .select-screen {
-        padding: 16px;
+        padding: 8px;
       }
       .select-box {
-        max-width: 1120px;
-        padding: 18px;
+        max-width: min(1120px, 100%);
+        max-height: calc(100dvh - 16px);
+        padding: 10px;
+        border-radius: 18px;
+        overflow: hidden;
       }
       .select-title {
-        margin-bottom: 14px;
+        margin-bottom: 10px;
       }
       .select-title h1 {
-        font-size: 26px;
-        margin: 0 0 8px;
+        font-size: 22px;
+        line-height: 1.15;
+        margin: 0 0 6px;
       }
       .select-title p {
-        font-size: 14px;
+        font-size: 12px;
+        line-height: 1.3;
         margin: 0;
       }
       .char-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
       }
       .char-card {
-        padding: 12px;
-        border-radius: 16px;
+        padding: 8px 6px;
+        border-radius: 14px;
       }
       .char-card img {
-        max-width: 140px;
-        height: 160px;
-        margin-bottom: 8px;
+        max-width: 100px;
+        height: 108px;
+        margin-bottom: 4px;
       }
       .char-card h3 {
-        font-size: 20px;
-        margin: 8px 0;
+        font-size: 16px;
+        line-height: 1.05;
+        margin: 4px 0;
       }
       .char-card p {
-        font-size: 13px;
-        line-height: 1.35;
-        margin: 6px 0;
+        font-size: 10px;
+        line-height: 1.2;
+        margin: 3px 0;
       }
       .battle-screen {
         min-height: 100dvh;
@@ -549,7 +561,9 @@
       .card-slot .label { font-size: 12px; }
       .card-slot .hint { font-size: 10px; }
       .log-box {
-        width: min(62vw, 460px);
+        left: 10px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        width: min(38vw, 280px);
         height: 48px;
         font-size: 11px;
       }
