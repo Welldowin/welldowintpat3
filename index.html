@@ -1061,6 +1061,7 @@
     let isResolving = false;
 
     const audioState = { bgmSelect: null, bgmBattle: null, loaded: false, unlocked: false };
+    const sfxPrepared = { criticalStrike: null, holyBeam: null };
 
     function createAudio(path, loop = false, volume = 1) {
       const audio = new Audio(path);
@@ -1073,6 +1074,8 @@
       if (audioState.loaded) return;
       audioState.bgmSelect = createAudio(AUDIO_PATHS.bgmSelect, true, 0.35);
       audioState.bgmBattle = createAudio(AUDIO_PATHS.bgmBattle, true, 0.35);
+      sfxPrepared.criticalStrike = createAudio(AUDIO_PATHS.sfxCriticalStrike, false, 1);
+      sfxPrepared.holyBeam = createAudio(AUDIO_PATHS.sfxHolyBeam, false, 0.95);
       audioState.loaded = true;
     }
     function safePlay(audio) { if (audio) audio.play().catch(() => {}); }
@@ -1081,6 +1084,15 @@
       const sfx = new Audio(path);
       sfx.volume = volume;
       sfx.play().catch(() => {});
+    }
+    function playPreparedSfx(audio, volume = 1) {
+      if (!audio) return;
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = volume;
+        audio.play().catch(() => {});
+      } catch (_) {}
     }
     function playSelectBGM() {
       setupAudio();
@@ -1438,7 +1450,8 @@
               addLog(`🗡️ นักฆ่าคริติคอล! ดาเมจเพิ่ม ${critDamage} หน่วย`);
               game.lastUltimateText = `คริติคอล +${critDamage}`;
               showFloating('CRITICAL STRIKE!', `ดาเมจเพิ่ม ${critDamage}`);
-              playSfx(AUDIO_PATHS.sfxCriticalStrike, 1);
+              await sleep(120);
+              playPreparedSfx(sfxPrepared.criticalStrike, 1);
               await sleep(720);
             }
           }
@@ -1492,7 +1505,8 @@
             addLog(`✨ ลำแสงศักดิ์สิทธิ์ของนักบวชโจมตี ${beamDamage} หน่วย`);
             game.lastUltimateText = `ลำแสงศักดิ์ ${beamDamage} หน่วย`;
             showFloating('HOLY BEAM!', `ดาเมจ ${beamDamage}`);
-            playSfx(AUDIO_PATHS.sfxHolyBeam, 0.95);
+            await sleep(180);
+            playPreparedSfx(sfxPrepared.holyBeam, 0.95);
             await sleep(760);
           }
         }
