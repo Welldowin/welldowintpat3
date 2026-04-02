@@ -30,15 +30,28 @@
         radial-gradient(circle at center, rgba(212,175,55,0.14), transparent 46%),
         #02081d;
     }
-    .start-box { text-align: center; }
-    .start-logo {
-  width: 780px;        /* ขยายโลโก */
-  max-width: 92vw;     /* กันล้นจอมือถือ */
-  display: block;
-  margin: 0 auto 28px; /* เว้นระยะจากปุ่ม */
-  object-fit: contain;
+    .start-box {
+  position: relative;
+}
 
-  filter: drop-shadow(0 14px 40px rgba(0,0,0,0.6));
+.start-btn-main {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;  /* 🔥 ขยับขึ้นจากขอบล่าง */
+
+  transform: translateX(-50%);
+  
+  z-index: 2; /* ให้อยู่เหนือโลโก้ */
+}
+    .start-logo {
+  width: 95vw;        /* ใหญ่เกือบเต็มจอ */
+  max-width: none;    /* เอาขีดจำกัดออก */
+  
+  display: block;
+  margin: 0 auto;
+  
+  object-fit: contain;
+  filter: drop-shadow(0 16px 50px rgba(0,0,0,0.7));
 
   animation: logoBreath 3s ease-in-out infinite;
 }
