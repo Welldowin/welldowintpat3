@@ -751,6 +751,58 @@
   }
 }
 
+
+/* === START SCREEN BUTTON UNDER LOGO PATCH === */
+.start-overlay {
+  padding: 16px;
+}
+
+.start-box {
+  width: min(92vw, 980px);
+  max-height: 92dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-logo {
+  width: min(980px, 88vw);
+  max-width: 88vw;
+  max-height: 68dvh;
+  margin: 0 auto 14px;
+}
+
+.start-btn-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .start-overlay {
+    padding: 10px;
+  }
+
+  .start-box {
+    width: min(94vw, 900px);
+    max-height: 94dvh;
+  }
+
+  .start-logo {
+    width: 88vw;
+    max-width: 88vw;
+    max-height: 62dvh;
+    margin: 0 auto 10px;
+  }
+
+  .start-btn-main {
+    font-size: 18px;
+    padding: 10px 28px;
+  }
+}
+
 </style>
 </head>
 <body>
