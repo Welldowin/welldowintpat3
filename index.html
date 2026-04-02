@@ -469,7 +469,47 @@
     .leader-footer { margin-top: 18px; text-align: center; }
 
     @media (max-width: 900px) {
-      .char-grid { grid-template-columns: 1fr; }
+      .leader-columns { grid-template-columns: 1fr; }
+      .select-screen {
+        padding: 16px;
+      }
+      .select-box {
+        max-width: 1120px;
+        padding: 18px;
+      }
+      .select-title {
+        margin-bottom: 14px;
+      }
+      .select-title h1 {
+        font-size: 26px;
+        margin: 0 0 8px;
+      }
+      .select-title p {
+        font-size: 14px;
+        margin: 0;
+      }
+      .char-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .char-card {
+        padding: 12px;
+        border-radius: 16px;
+      }
+      .char-card img {
+        max-width: 140px;
+        height: 160px;
+        margin-bottom: 8px;
+      }
+      .char-card h3 {
+        font-size: 20px;
+        margin: 8px 0;
+      }
+      .char-card p {
+        font-size: 13px;
+        line-height: 1.35;
+        margin: 6px 0;
+      }
       .battle-screen {
         min-height: 100dvh;
         height: 100dvh;
