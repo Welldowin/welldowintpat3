@@ -102,11 +102,13 @@
     .char-card p { color: #d6deec; line-height: 1.5; }
 
     .battle-screen {
-      min-height: 100vh;
-      height: 100vh;
+      min-height: 100dvh;
+      height: 100dvh;
       background: #07102a;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .battle-topbar {
       padding: 14px 18px;
@@ -276,7 +278,7 @@
       right: 0;
       bottom: 0;
       min-height: 205px;
-      padding: 14px 18px 16px;
+      padding: 14px 18px calc(16px + env(safe-area-inset-bottom, 0px));
       z-index: 6;
       pointer-events: none;
     }
@@ -455,16 +457,155 @@
 
     @media (max-width: 900px) {
       .char-grid, .leader-columns { grid-template-columns: 1fr; }
-      .battle-topbar { grid-template-columns: 1fr; }
-      .arena { padding: 16px 4vw 220px; }
-      .fighter { width: 40%; height: 60%; }
-      .vs-text { font-size: 28px; }
-      .turn-counter { font-size: 18px; }
-      .card-slot { width: 96px; height: 118px; }
-      .action-panel { right: 12px; bottom: 18px; }
-      .action-btn { min-width: 140px; font-size: 14px; padding: 10px 12px; }
-      .log-box { width: min(560px, 92vw); }
+      .battle-screen {
+        min-height: 100dvh;
+        height: 100dvh;
+      }
+      .battle-topbar {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 12px;
+      }
+      .status-box {
+        padding: 10px 12px;
+      }
+      .status-name { font-size: 16px; }
+      .status-line { font-size: 13px; }
+      .bar-wrap { height: 14px; }
+      .battle-field {
+        inset: 182px 0 0 0;
+      }
+      .center-ui {
+        top: 6px;
+        gap: 6px;
+      }
+      .turn-counter {
+        font-size: 15px;
+        padding: 8px 14px;
+      }
+      .vs-text {
+        font-size: 22px;
+      }
+      .arena {
+        align-items: center;
+        padding: 56px 3vw 190px;
+      }
+      .fighter {
+        width: 44%;
+        max-width: none;
+        height: min(50vw, 280px);
+      }
+      .fighter img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      .battle-bottom {
+        min-height: 176px;
+        padding: 10px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: linear-gradient(to top, rgba(4,8,20,0.94), rgba(4,8,20,0.75), rgba(4,8,20,0));
+      }
+      .cards-panel {
+        gap: 8px;
+      }
+      .cards-title {
+        font-size: 14px;
+      }
+      .card-slots {
+        gap: 8px;
+        flex-wrap: nowrap;
+      }
+      .card-slot {
+        width: clamp(86px, 22vw, 98px);
+        height: 108px;
+        padding: 8px 6px;
+      }
+      .card-slot .icon { font-size: 34px; margin-bottom: 6px; }
+      .card-slot .label { font-size: 14px; }
+      .card-slot .hint { font-size: 11px; margin-top: 4px; }
+      .log-box {
+        width: calc(100vw - 156px);
+        min-height: 56px;
+        height: 56px;
+        margin-right: auto;
+        font-size: 12px;
+      }
+      .action-panel {
+        right: 10px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        gap: 8px;
+      }
+      .action-btn {
+        min-width: 126px;
+        font-size: 14px;
+        padding: 10px 12px;
+      }
+      .floating-result {
+        top: 14%;
+        min-width: 170px;
+        padding: 14px 16px;
+      }
+      .floating-result .big { font-size: 30px; }
+      .floating-result .small { font-size: 13px; }
+      .damage-float {
+        right: 18%;
+        top: 34%;
+        font-size: 28px;
+      }
       .start-logo { width: 260px; }
+    }
+
+
+    @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+      .battle-topbar {
+        padding: 8px 10px;
+        gap: 8px;
+      }
+      .status-box {
+        padding: 8px 10px;
+      }
+      .status-name { font-size: 15px; margin-bottom: 6px; }
+      .status-line { font-size: 12px; margin: 4px 0 3px; }
+      .bar-wrap { height: 12px; margin-bottom: 4px; }
+      .battle-field {
+        inset: 154px 0 0 0;
+      }
+      .center-ui {
+        top: 4px;
+        gap: 4px;
+      }
+      .turn-counter {
+        font-size: 13px;
+        padding: 6px 12px;
+      }
+      .vs-text { font-size: 18px; }
+      .arena {
+        padding: 40px 2vw 158px;
+      }
+      .fighter {
+        height: min(42vw, 210px);
+      }
+      .battle-bottom {
+        min-height: 148px;
+        padding-top: 8px;
+      }
+      .card-slot {
+        width: clamp(78px, 19vw, 90px);
+        height: 94px;
+      }
+      .card-slot .icon { font-size: 28px; }
+      .card-slot .label { font-size: 13px; }
+      .card-slot .hint { font-size: 10px; }
+      .log-box {
+        width: calc(100vw - 146px);
+        height: 48px;
+        min-height: 48px;
+      }
+      .action-btn {
+        min-width: 118px;
+        font-size: 13px;
+        padding: 9px 10px;
+      }
     }
 
     .orientation-overlay {
