@@ -30,7 +30,10 @@
         radial-gradient(circle at center, rgba(212,175,55,0.14), transparent 46%),
         #02081d;
     }
-    .start-box { text-align: center; }
+    .start-box {
+  position: relative;
+  text-align: center;
+}
     .start-logo-bg {
   position: absolute;
   top: 50%;
@@ -47,16 +50,17 @@
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
 }
     .start-btn-main {
-      font-size: 24px;
-      padding: 14px 36px;
-      background: linear-gradient(135deg, #8f6b1f, #d4af37, #8f6b1f);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 14px;
-      color: #0b1438;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    }
+  position: absolute;
+  left: 50%;
+  bottom: 8%; /* ปรับได้ เช่น 5%–12% */
+
+  transform: translateX(-50%);
+  
+  font-size: 22px;
+  padding: 12px 32px;
+
+  z-index: 2;
+}
 
     .select-screen {
       padding: 14px;
@@ -611,7 +615,12 @@
       .leader-column h3 { font-size: 14px; margin: 0 0 8px; text-align: center; }
       .leader-item { font-size: 11px; padding: 7px 8px; }
       .leader-footer { margin-top: 10px; }
-      .start-logo { width: 260px; }
+      .start-logo {
+  width: 720px;
+  max-width: 90vw;
+  display: block;
+  margin: 0 auto;
+}
     }
 
     .orientation-overlay {
