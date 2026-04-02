@@ -1632,26 +1632,43 @@
       }
       const input = document.getElementById('playerRecordName');
       const playerName = input.value.trim() || 'Unknown Hero';
+      const payload = {
+        name: playerName,
+        class: game.selected,
+        turn: game.turn
+      };
+      let savedRemote = false;
 
       try {
-        await fetch(API_URL, {
+        const res = await fetch(API_URL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain;charset=utf-8'
           },
-          body: JSON.stringify({
-            name: playerName,
-            class: game.selected,
-            turn: game.turn
-          })
+          body: JSON.stringify(payload)
         });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        savedRemote = true;
       } catch (err) {
-        console.error('Save error:', err);
-        const board = getLeaderboard();
-        board[game.selected].push({ name: playerName, turn: game.turn });
-        board[game.selected].sort((a, b) => a.turn - b.turn);
-        board[game.selected] = board[game.selected].slice(0, 10);
-        saveLeaderboard(board);
+        console.error('POST save error:', err);
+        try {
+          const fallbackUrl = `${API_URL}?action=save&name=${encodeURIComponent(payload.name)}&class=${encodeURIComponent(payload.class)}&turn=${encodeURIComponent(payload.turn)}`;
+          const fallbackRes = await fetch(fallbackUrl, { method: 'GET' });
+          if (!fallbackRes.ok) throw new Error(`Fallback HTTP ${fallbackRes.status}`);
+          savedRemote = true;
+        } catch (fallbackErr) {
+          console.error('GET save fallback error:', fallbackErr);
+        }
+      }
+
+      const board = getLeaderboard();
+      board[game.selected].push({ name: playerName, turn: game.turn });
+      board[game.selected].sort((a, b) => a.turn - b.turn);
+      board[game.selected] = board[game.selected].slice(0, 10);
+      saveLeaderboard(board);
+
+      if (!savedRemote) {
+        addLog('บันทึกลงชีตไม่สำเร็จ ระบบเก็บในเครื่องชั่วคราว');
       }
 
       await showLeaderboard();
