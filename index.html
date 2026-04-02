@@ -30,31 +30,16 @@
         radial-gradient(circle at center, rgba(212,175,55,0.14), transparent 46%),
         #02081d;
     }
-    .start-box {
-      position: relative;
-      width: min(78vw, 720px);
-      aspect-ratio: 1.8 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+    .start-box { text-align: center; }
     .start-logo {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
+      width: 540px;
+      max-width: 78vw;
       display: block;
+      margin: 0 auto 22px;
       object-fit: contain;
       filter: drop-shadow(0 10px 30px rgba(0,0,0,0.55));
-      animation: startLogoBreath 3s ease-in-out infinite;
-      pointer-events: none;
-      user-select: none;
     }
     .start-btn-main {
-      position: absolute;
-      left: 50%;
-      top: 80%;
-      transform: translateX(-50%);
       font-size: 24px;
       padding: 14px 36px;
       background: linear-gradient(135deg, #8f6b1f, #d4af37, #8f6b1f);
@@ -64,15 +49,14 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-      z-index: 2;
-      white-space: nowrap;
     }
 
     .select-screen {
-      padding: 24px;
+      padding: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
       background:
         linear-gradient(rgba(10, 14, 28, 0.68), rgba(10, 14, 28, 0.78)),
         url('./assets/select-bg.png') center center / cover no-repeat;
@@ -80,12 +64,14 @@
     .select-box {
       width: 100%;
       max-width: 1120px;
+      max-height: calc(100dvh - 28px);
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 24px;
-      padding: 24px;
+      padding: 20px;
       backdrop-filter: blur(10px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
     }
     .select-title { text-align: center; margin-bottom: 20px; }
     .select-title p { color: #d7deef; }
@@ -119,37 +105,52 @@
     .char-card p { color: #d6deec; line-height: 1.5; }
 
     .battle-screen {
-      min-height: 100vh;
-      height: 100vh;
+      min-height: 100dvh;
+      height: 100dvh;
       background: #07102a;
       position: relative;
       overflow: hidden;
     }
-    .battle-topbar {
-      padding: 14px 18px;
-      background: rgba(7,10,20,0.82);
-      backdrop-filter: blur(8px);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      position: relative;
+    .battle-field {
+      position: absolute;
+      inset: 0;
+      background: url('./assets/battle-bg.png') center center / cover no-repeat;
+      overflow: hidden;
+    }
+    .battle-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.24));
+      pointer-events: none;
+    }
+    .battle-status-layer {
+      position: absolute;
+      inset: 0;
       z-index: 5;
+      pointer-events: none;
     }
     .status-box {
-      background: rgba(255,255,255,0.08);
+      position: absolute;
+      top: 18px;
+      width: min(22vw, 270px);
+      background: rgba(8, 12, 24, 0.72);
+      border: 1px solid rgba(255,255,255,0.10);
       border-radius: 16px;
-      padding: 12px 14px;
+      padding: 10px 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.30);
     }
-    .status-name { font-weight: bold; margin-bottom: 8px; font-size: 18px; }
-    .status-line { font-size: 14px; color: #cbd5e1; margin: 6px 0 4px; }
+    .status-box.player-panel { left: 18px; }
+    .status-box.boss-panel { right: 18px; }
+    .status-name { font-weight: bold; margin-bottom: 6px; font-size: 16px; }
+    .status-line { font-size: 12px; color: #cbd5e1; margin: 4px 0 3px; }
     .bar-wrap {
       width: 100%;
-      height: 18px;
+      height: 10px;
       background: rgba(255,255,255,0.12);
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .bar {
       height: 100%;
@@ -161,44 +162,32 @@
     .gauge-bar-player { background: linear-gradient(90deg, #38bdf8, #8b5cf6); }
     .gauge-bar-boss { background: linear-gradient(90deg, #f97316, #ef4444); }
 
-    .battle-field {
-      position: absolute;
-      inset: 120px 0 0 0;
-      background: url('./assets/battle-bg.png') center center / cover no-repeat;
-      overflow: hidden;
-    }
-    .battle-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.25));
-      pointer-events: none;
-    }
     .center-ui {
       position: absolute;
-      top: 12%;
+      top: 18px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       pointer-events: none;
     }
     .turn-counter {
       background: rgba(10, 14, 28, 0.74);
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 999px;
-      padding: 10px 22px;
+      padding: 8px 18px;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       backdrop-filter: blur(8px);
     }
     .vs-text {
-      font-size: 52px;
+      font-size: 40px;
       font-weight: bold;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255,255,255,0.92);
       text-shadow: 0 6px 20px rgba(0,0,0,0.5);
     }
     .arena {
@@ -207,14 +196,14 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      padding: 24px 3vw 205px;
+      padding: 110px 15vw 150px;
       z-index: 2;
       pointer-events: none;
     }
     .fighter {
-      width: 42%;
-      max-width: 560px;
-      height: 88%;
+      width: min(28vw, 360px);
+      height: 60dvh;
+      min-height: 320px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -292,35 +281,37 @@
       left: 0;
       right: 0;
       bottom: 0;
-      min-height: 205px;
-      padding: 14px 18px 16px;
+      min-height: 148px;
+      padding: 10px 18px calc(12px + env(safe-area-inset-bottom, 0px));
       z-index: 6;
       pointer-events: none;
+      background: linear-gradient(to top, rgba(3,7,19,0.94), rgba(3,7,19,0.76), rgba(3,7,19,0));
     }
     .cards-panel {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       pointer-events: auto;
     }
     .cards-title {
       width: 100%;
       text-align: center;
       font-weight: bold;
+      font-size: 15px;
       color: #e2e8f0;
       text-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
     .card-slots {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      gap: 12px;
+      flex-wrap: nowrap;
     }
     .card-slot {
-      width: 120px;
-      height: 140px;
+      width: 102px;
+      height: 118px;
       border-radius: 18px;
       border: 2px dashed rgba(255,255,255,0.35);
       background: rgba(8,12,24,0.48);
@@ -344,41 +335,47 @@
       border-color: #d4af37;
       box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
     }
-    .card-slot .icon { font-size: 46px; margin-bottom: 10px; }
-    .card-slot .label { font-size: 16px; font-weight: bold; }
-    .card-slot .hint { margin-top: 6px; font-size: 12px; color: #94a3b8; }
+    .card-slot .icon { font-size: 36px; margin-bottom: 6px; }
+    .card-slot .label { font-size: 14px; font-weight: bold; }
+    .card-slot .hint { margin-top: 4px; font-size: 11px; color: #94a3b8; }
     .action-panel {
       position: absolute;
-      right: 18px;
-      bottom: 26px;
+      left: 50%;
+      bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
       gap: 10px;
       pointer-events: auto;
     }
     .action-btn {
-      min-width: 168px;
-      padding: 11px 16px;
+      min-width: 132px;
+      padding: 9px 14px;
       border-radius: 14px;
       border: none;
       cursor: pointer;
       color: white;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 14px;
       box-shadow: 0 10px 24px rgba(0,0,0,0.28);
     }
     .start-btn { background: linear-gradient(135deg, #7c3aed, #db2777); }
     .surrender-btn { background: linear-gradient(135deg, #991b1b, #dc2626); }
 
     .log-box {
-      width: min(680px, 92vw);
-      height: 84px;
+      position: absolute;
+      left: 18px;
+      bottom: 12px;
+      width: min(420px, 28vw);
+      height: 56px;
       overflow-y: auto;
       background: rgba(255,255,255,0.08);
       opacity: 0.28;
       transition: 0.2s;
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 8px 10px;
+      font-size: 12px;
       backdrop-filter: blur(6px);
     }
     .log-box:hover {
@@ -437,35 +434,42 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      padding: 16px;
       background:
         linear-gradient(rgba(10, 14, 28, 0.68), rgba(10, 14, 28, 0.78)),
         url('./assets/battle-bg.png') center/cover no-repeat;
     }
     .leaderboard-box {
-      width: 100%;
-      max-width: 1080px;
+      width: min(1160px, 100%);
+      height: min(92dvh, 680px);
       background: rgba(255,255,255,0.1);
-      padding: 20px;
+      padding: 18px;
       border-radius: 20px;
       backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
     .leader-columns {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
     }
     .leader-column {
       background: rgba(255,255,255,0.08);
       padding: 14px;
       border-radius: 16px;
-      min-height: 260px;
+      min-height: 0;
+      overflow: auto;
     }
     .leader-item {
       background: rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 10px 12px;
-      margin-bottom: 10px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
     }
     .leader-empty { opacity: 0.75; text-align: center; margin-top: 24px; }
     .leader-footer { margin-top: 18px; text-align: center; }
@@ -518,244 +522,89 @@
         line-height: 1.2;
         margin: 3px 0;
       }
-      .battle-topbar { grid-template-columns: 1fr; }
-      .arena { padding: 16px 4vw 220px; }
-      .fighter { width: 40%; height: 60%; }
-      .vs-text { font-size: 28px; }
-      .turn-counter { font-size: 18px; }
-      .card-slot { width: 96px; height: 118px; }
-      .action-panel { right: 12px; bottom: 18px; }
-      .action-btn { min-width: 140px; font-size: 14px; padding: 10px 12px; }
-      .log-box { width: min(560px, 92vw); }
-      .start-box { width: min(92vw, 560px); }
-      .start-btn-main {
-        top: 78%;
-        font-size: 20px;
-        padding: 12px 28px;
-      }
-    }
-
-
-    /* Mobile-first battle layout tuning */
-    .battle-screen {
-      height: 100dvh;
-      min-height: 100dvh;
-    }
-    .battle-topbar {
-      max-height: 26dvh;
-      overflow: hidden;
-    }
-    .battle-field {
-      inset: 120px 0 0 0;
-    }
-    .fighter.player img,
-    .fighter.boss img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      object-position: center bottom;
-    }
-
-    @media (max-width: 900px) {
       .battle-screen {
-        height: 100dvh;
         min-height: 100dvh;
-      }
-      .battle-topbar {
-        gap: 10px;
-        padding: 10px 12px;
+        height: 100dvh;
       }
       .status-box {
-        padding: 10px 12px;
-        border-radius: 14px;
-      }
-      .status-name { font-size: 16px; margin-bottom: 6px; }
-      .status-line { font-size: 13px; margin: 4px 0 3px; }
-      .bar-wrap { height: 14px; margin-bottom: 5px; }
-      .battle-field {
-        inset: 146px 0 0 0;
-      }
-      .center-ui {
-        top: 4px;
-        gap: 4px;
-      }
-      .turn-counter {
-        padding: 7px 14px;
-        font-size: 14px;
-      }
-      .vs-text {
-        font-size: 18px;
-      }
-      .arena {
-        align-items: center;
-        padding: 42px 3vw 160px;
-      }
-      .fighter {
-        width: 46%;
-        max-width: none;
-        height: min(48dvh, 330px);
-        align-items: flex-end;
-      }
-      .fighter.player img,
-      .fighter.boss img {
-        max-height: 100%;
-        max-width: 100%;
-      }
-      .battle-bottom {
-        min-height: 150px;
-        padding: 8px 10px 10px;
-      }
-      .cards-panel {
-        gap: 8px;
-      }
-      .cards-title {
-        font-size: 15px;
-      }
-      .card-slots {
-        gap: 8px;
-      }
-      .card-slot {
-        width: 84px;
-        height: 102px;
-        padding: 6px;
-        border-radius: 14px;
-      }
-      .card-slot .icon { font-size: 34px; margin-bottom: 4px; }
-      .card-slot .label { font-size: 14px; }
-      .card-slot .hint { font-size: 10px; margin-top: 2px; }
-      .action-panel {
-        right: 10px;
-        bottom: 10px;
-        gap: 8px;
-      }
-      .action-btn {
-        min-width: 118px;
-        font-size: 13px;
-        padding: 9px 10px;
+        top: 10px;
+        width: min(28vw, 156px);
+        padding: 8px 9px;
         border-radius: 12px;
       }
+      .status-box.player-panel { left: 10px; }
+      .status-box.boss-panel { right: 10px; }
+      .status-name { font-size: 13px; margin-bottom: 4px; }
+      .status-line { font-size: 10px; margin: 3px 0 2px; }
+      .bar-wrap { height: 8px; margin-bottom: 4px; }
+      .center-ui { top: 8px; gap: 4px; }
+      .turn-counter { font-size: 14px; padding: 6px 12px; }
+      .vs-text { font-size: 24px; }
+      .arena { padding: 70px 15vw 128px; }
+      .fighter {
+        width: min(30vw, 190px);
+        height: min(60dvh, 250px);
+        min-height: 200px;
+      }
+      .battle-bottom {
+        min-height: 122px;
+        padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+      }
+      .cards-title { font-size: 13px; }
+      .card-slots { gap: 8px; }
+      .card-slot {
+        width: clamp(76px, 18vw, 88px);
+        height: 96px;
+        padding: 6px 4px;
+      }
+      .card-slot .icon { font-size: 30px; }
+      .card-slot .label { font-size: 12px; }
+      .card-slot .hint { font-size: 10px; }
       .log-box {
-        width: min(52vw, 320px);
-        height: 62px;
+        left: 10px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        width: min(38vw, 280px);
+        height: 48px;
+        font-size: 11px;
+      }
+      .action-panel {
+        gap: 8px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+      }
+      .action-btn {
+        min-width: 108px;
         padding: 8px 10px;
         font-size: 12px;
       }
-      .damage-float {
-        right: 18%;
-        top: 34%;
-        font-size: 24px;
-      }
       .floating-result {
-        top: 18%;
+        top: 16%;
         min-width: 160px;
         padding: 12px 14px;
       }
       .floating-result .big { font-size: 28px; }
-      .floating-result .small { font-size: 13px; }
+      .floating-result .small { font-size: 12px; }
+      .damage-float {
+        right: 14%;
+        top: 34%;
+        font-size: 24px;
+      }
+      .leaderboard-screen { padding: 10px; }
+      .leaderboard-box {
+        height: min(94dvh, 560px);
+        padding: 12px;
+      }
+      .leaderboard-box h1 { font-size: 20px; margin: 0 0 8px; text-align: center; }
+      .leaderboard-box > p { font-size: 12px; margin: 0 0 10px; }
+      .leader-columns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .leader-column { padding: 10px; }
+      .leader-column h3 { font-size: 14px; margin: 0 0 8px; text-align: center; }
+      .leader-item { font-size: 11px; padding: 7px 8px; }
+      .leader-footer { margin-top: 10px; }
+      .start-logo { width: 260px; }
     }
-
-    @media (max-width: 900px) and (orientation: landscape) {
-      .battle-topbar {
-        grid-template-columns: 1fr 1fr;
-        max-height: none;
-      }
-      .battle-field {
-        inset: 106px 0 0 0;
-      }
-      .arena {
-        padding: 24px 3vw 136px;
-      }
-      .fighter {
-        width: 44%;
-        height: min(50dvh, 290px);
-      }
-      .log-box {
-        width: min(42vw, 300px);
-      }
-    }
-
-    @media (max-width: 900px) and (orientation: portrait) {
-      .select-screen,
-      .leaderboard-screen {
-        overflow-y: auto;
-      }
-      .battle-topbar {
-        grid-template-columns: 1fr;
-        max-height: none;
-      }
-      .battle-field {
-        inset: 220px 0 0 0;
-      }
-      .center-ui {
-        top: 6px;
-      }
-      .arena {
-        padding: 32px 2vw 190px;
-      }
-      .fighter {
-        width: 48%;
-        height: min(32dvh, 240px);
-      }
-      .fighter.player img,
-      .fighter.boss img {
-        max-width: 94%;
-        max-height: 94%;
-      }
-      .battle-bottom {
-        min-height: 182px;
-        padding: 10px 8px 12px;
-      }
-      .cards-title {
-        font-size: 14px;
-      }
-      .card-slot {
-        width: 76px;
-        height: 94px;
-      }
-      .card-slot .icon { font-size: 30px; }
-      .card-slot .label { font-size: 13px; }
-      .action-panel {
-        position: static;
-        width: 100%;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 6px;
-      }
-      .action-btn {
-        min-width: 132px;
-      }
-      .log-box {
-        width: min(92vw, 360px);
-        opacity: 0.85;
-      }
-      .floating-result {
-        top: 24%;
-      }
-    }
-
-    /* Character-specific mobile balancing */
-    @media (max-width: 900px) {
-      .battle-screen[data-char="assassin"] .fighter.player img {
-        max-height: 92%;
-      }
-      .battle-screen[data-char="priest"] .fighter.player img {
-        max-height: 96%;
-      }
-      .battle-screen[data-char="swordsman"] .fighter.player img {
-        max-height: 94%;
-      }
-      .battle-screen .fighter.boss img {
-        max-height: 90%;
-      }
-    }
-
-    @keyframes startLogoBreath {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-    }
-
 
     .orientation-overlay {
       position: fixed;
@@ -839,30 +688,29 @@
     </section>
 
     <section class="screen battle-screen hidden" id="battleScreen">
-      <div class="battle-topbar">
-        <div class="status-box">
-          <div class="status-name" id="playerName">ผู้เล่น</div>
-          <div class="status-line" id="playerHpText">HP: 100 / 100</div>
-          <div class="bar-wrap"><div class="bar hp-bar" id="playerHpBar"></div></div>
-          <div class="status-line" id="playerGaugeText">เกจพลัง: 0%</div>
-          <div class="bar-wrap"><div class="bar gauge-bar-player" id="playerGaugeBar"></div></div>
-          <div class="status-line" id="playerExtraText">สถานะพิเศษ: ไม่มี</div>
-        </div>
-        <div class="status-box">
-          <div class="status-name" id="bossName">ราชาก็อบลิน</div>
-          <div class="status-line" id="bossHpText">HP: 300 / 300</div>
-          <div class="bar-wrap"><div class="bar hp-bar" id="bossHpBar"></div></div>
-          <div class="status-line" id="bossGaugeText">เกจพลังบอส: 0%</div>
-          <div class="bar-wrap"><div class="bar gauge-bar-boss" id="bossGaugeBar"></div></div>
-          <div class="status-line" id="bossExtraText">บอสโจมตีปกติ -15</div>
-        </div>
-      </div>
-
       <div class="battle-field">
         <div class="battle-overlay"></div>
-        <div class="center-ui">
-          <div class="turn-counter" id="turnCounter">TURN : 1</div>
-          <div class="vs-text">VS</div>
+        <div class="battle-status-layer">
+          <div class="status-box player-panel">
+            <div class="status-name" id="playerName">ผู้เล่น</div>
+            <div class="status-line" id="playerHpText">HP: 100 / 100</div>
+            <div class="bar-wrap"><div class="bar hp-bar" id="playerHpBar"></div></div>
+            <div class="status-line" id="playerGaugeText">เกจพลัง: 0%</div>
+            <div class="bar-wrap"><div class="bar gauge-bar-player" id="playerGaugeBar"></div></div>
+            <div class="status-line" id="playerExtraText">สถานะพิเศษ: ไม่มี</div>
+          </div>
+          <div class="center-ui">
+            <div class="turn-counter" id="turnCounter">TURN : 1</div>
+            <div class="vs-text">VS</div>
+          </div>
+          <div class="status-box boss-panel">
+            <div class="status-name" id="bossName">ราชาก็อบลิน</div>
+            <div class="status-line" id="bossHpText">HP: 300 / 300</div>
+            <div class="bar-wrap"><div class="bar hp-bar" id="bossHpBar"></div></div>
+            <div class="status-line" id="bossGaugeText">เกจพลังบอส: 0%</div>
+            <div class="bar-wrap"><div class="bar gauge-bar-boss" id="bossGaugeBar"></div></div>
+            <div class="status-line" id="bossExtraText">บอสโจมตีปกติ -15</div>
+          </div>
         </div>
         <div class="arena">
           <div class="fighter player"><img id="playerBattleImg" src="./assets/char1.png" alt="player"></div>
@@ -887,33 +735,32 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="battle-bottom">
-        <div class="cards-panel">
-          <div class="cards-title">เลือกการ์ด 3 ช่อง</div>
-          <div class="card-slots">
-            <div class="card-slot" data-slot="0" onclick="cycleCard(0)">
-              <div class="icon" id="slotIcon0">?</div>
-              <div class="label" id="slotLabel0">ช่อง 1</div>
-              <div class="hint">คลิกเพื่อเลือก</div>
+        <div class="battle-bottom">
+          <div class="cards-panel">
+            <div class="cards-title">เลือกการ์ด 3 ช่อง</div>
+            <div class="card-slots">
+              <div class="card-slot" data-slot="0" onclick="cycleCard(0)">
+                <div class="icon" id="slotIcon0">?</div>
+                <div class="label" id="slotLabel0">ช่อง 1</div>
+                <div class="hint">คลิกเพื่อเลือก</div>
+              </div>
+              <div class="card-slot" data-slot="1" onclick="cycleCard(1)">
+                <div class="icon" id="slotIcon1">?</div>
+                <div class="label" id="slotLabel1">ช่อง 2</div>
+                <div class="hint">คลิกเพื่อเลือก</div>
+              </div>
+              <div class="card-slot" data-slot="2" onclick="cycleCard(2)">
+                <div class="icon" id="slotIcon2">?</div>
+                <div class="label" id="slotLabel2">ช่อง 3</div>
+                <div class="hint">คลิกเพื่อเลือก</div>
+              </div>
             </div>
-            <div class="card-slot" data-slot="1" onclick="cycleCard(1)">
-              <div class="icon" id="slotIcon1">?</div>
-              <div class="label" id="slotLabel1">ช่อง 2</div>
-              <div class="hint">คลิกเพื่อเลือก</div>
-            </div>
-            <div class="card-slot" data-slot="2" onclick="cycleCard(2)">
-              <div class="icon" id="slotIcon2">?</div>
-              <div class="label" id="slotLabel2">ช่อง 3</div>
-              <div class="hint">คลิกเพื่อเลือก</div>
-            </div>
+            <div class="log-box" id="battleLog">เริ่มเลือกการ์ดได้เลย</div>
           </div>
-          <div class="log-box" id="battleLog">เริ่มเลือกการ์ดได้เลย</div>
-        </div>
-        <div class="action-panel">
-          <button class="action-btn start-btn" id="startBtn" onclick="startBattleRound()" disabled>เริ่มการต่อสู้</button>
-          <button class="action-btn surrender-btn" onclick="surrender()">ยอมแพ้</button>
+          <div class="action-panel">
+            <button class="action-btn start-btn" id="startBtn" onclick="startBattleRound()" disabled>เริ่มการต่อสู้</button>
+            <button class="action-btn surrender-btn" onclick="surrender()">ยอมแพ้</button>
+          </div>
         </div>
       </div>
     </section>
@@ -975,7 +822,10 @@
       sfxLose: './assets/audio/sfx-lose.mp3',
       sfxDoubleSlash: './assets/audio/DoubleSlash.mp3',
       sfxCriticalStrike: './assets/audio/CriticalStrike.mp3',
-      sfxHolyBeam: './assets/audio/HolyBeam.mp3'
+      sfxHolyBeam: './assets/audio/HolyBeam.mp3',
+      sfxCombo1: './assets/audio/combo1.mp3',
+      sfxCombo2: './assets/audio/combo2.mp3',
+      sfxCombo3: './assets/audio/combo3.mp3'
     };
 
     const LEADERBOARD_KEY = 'battle_of_fortune_lb_v3';
@@ -1071,7 +921,6 @@
       document.getElementById('selectScreen').classList.add('hidden');
       document.getElementById('leaderboardScreen').classList.add('hidden');
       document.getElementById('battleScreen').classList.remove('hidden');
-      document.getElementById('battleScreen').setAttribute('data-char', charId);
 
       document.getElementById('playerBattleImg').src = game.playerImage;
       document.getElementById('bossBattleImg').src = BOSS.image;
@@ -1292,6 +1141,9 @@
 
         if (result === 'win') {
           winStreak++;
+          if (winStreak === 1) playSfx(AUDIO_PATHS.sfxCombo1, 0.9);
+          else if (winStreak === 2) playSfx(AUDIO_PATHS.sfxCombo2, 0.95);
+          else if (winStreak >= 3) playSfx(AUDIO_PATHS.sfxCombo3, 1);
           game.winsThisTurn++;
           game.bossHp = Math.max(0, game.bossHp - 20);
           addPlayerGauge(10);
@@ -1484,26 +1336,43 @@
       }
       const input = document.getElementById('playerRecordName');
       const playerName = input.value.trim() || 'Unknown Hero';
+      const payload = {
+        name: playerName,
+        class: game.selected,
+        turn: game.turn
+      };
+      let savedRemote = false;
 
       try {
-        await fetch(API_URL, {
+        const res = await fetch(API_URL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain;charset=utf-8'
           },
-          body: JSON.stringify({
-            name: playerName,
-            class: game.selected,
-            turn: game.turn
-          })
+          body: JSON.stringify(payload)
         });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        savedRemote = true;
       } catch (err) {
-        console.error('Save error:', err);
-        const board = getLeaderboard();
-        board[game.selected].push({ name: playerName, turn: game.turn });
-        board[game.selected].sort((a, b) => a.turn - b.turn);
-        board[game.selected] = board[game.selected].slice(0, 10);
-        saveLeaderboard(board);
+        console.error('POST save error:', err);
+        try {
+          const fallbackUrl = `${API_URL}?action=save&name=${encodeURIComponent(payload.name)}&class=${encodeURIComponent(payload.class)}&turn=${encodeURIComponent(payload.turn)}`;
+          const fallbackRes = await fetch(fallbackUrl, { method: 'GET' });
+          if (!fallbackRes.ok) throw new Error(`Fallback HTTP ${fallbackRes.status}`);
+          savedRemote = true;
+        } catch (fallbackErr) {
+          console.error('GET save fallback error:', fallbackErr);
+        }
+      }
+
+      const board = getLeaderboard();
+      board[game.selected].push({ name: playerName, turn: game.turn });
+      board[game.selected].sort((a, b) => a.turn - b.turn);
+      board[game.selected] = board[game.selected].slice(0, 10);
+      saveLeaderboard(board);
+
+      if (!savedRemote) {
+        addLog('บันทึกลงชีตไม่สำเร็จ ระบบเก็บในเครื่องชั่วคราว');
       }
 
       await showLeaderboard();
