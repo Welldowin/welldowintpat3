@@ -455,15 +455,118 @@
 
     @media (max-width: 900px) {
       .char-grid, .leader-columns { grid-template-columns: 1fr; }
-      .battle-topbar { grid-template-columns: 1fr; }
-      .arena { padding: 16px 4vw 220px; }
-      .fighter { width: 40%; height: 60%; }
-      .vs-text { font-size: 28px; }
-      .turn-counter { font-size: 18px; }
-      .card-slot { width: 96px; height: 118px; }
-      .action-panel { right: 12px; bottom: 18px; }
-      .action-btn { min-width: 140px; font-size: 14px; padding: 10px 12px; }
-      .log-box { width: min(560px, 92vw); }
+      .battle-screen {
+        min-height: 100dvh;
+        height: 100dvh;
+      }
+      .battle-topbar {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 8px 10px;
+      }
+      .status-box {
+        padding: 8px 10px;
+        border-radius: 14px;
+      }
+      .status-name {
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+      .status-line {
+        font-size: 11px;
+        margin: 3px 0 2px;
+      }
+      .bar-wrap {
+        height: 10px;
+        margin-bottom: 3px;
+      }
+      .battle-field {
+        inset: 108px 0 0 0;
+      }
+      .center-ui {
+        top: 8px;
+        gap: 2px;
+      }
+      .turn-counter {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+      .vs-text {
+        font-size: 16px;
+      }
+      .arena {
+        padding: 34px 2vw 132px;
+      }
+      .fighter {
+        width: 46%;
+        height: 70%;
+        max-width: none;
+      }
+      .fighter img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      .battle-bottom {
+        min-height: 122px;
+        padding: 6px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+      }
+      .cards-panel {
+        gap: 5px;
+      }
+      .cards-title {
+        font-size: 12px;
+      }
+      .card-slots {
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+      .card-slot {
+        width: 76px;
+        height: 82px;
+        padding: 6px 4px;
+        border-radius: 14px;
+      }
+      .card-slot .icon {
+        font-size: 24px;
+        margin-bottom: 2px;
+      }
+      .card-slot .label {
+        font-size: 11px;
+      }
+      .card-slot .hint {
+        font-size: 9px;
+        margin-top: 2px;
+      }
+      .log-box {
+        width: calc(100vw - 132px);
+        min-height: 42px;
+        height: 42px;
+        margin-right: auto;
+        font-size: 10px;
+        padding: 8px 10px;
+      }
+      .action-panel {
+        right: 8px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        gap: 6px;
+      }
+      .action-btn {
+        min-width: 110px;
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+      .floating-result {
+        top: 14%;
+        min-width: 150px;
+        padding: 12px 14px;
+      }
+      .floating-result .big { font-size: 26px; }
+      .floating-result .small { font-size: 12px; }
+      .damage-float {
+        right: 18%;
+        top: 30%;
+        font-size: 24px;
+      }
       .start-logo { width: 260px; }
     }
 
@@ -512,263 +615,9 @@
       }
     }
 
-  
-    :root {
-      --mobile-landscape-ratio: 2.16;
-    }
-    .preview-badge {
-      position: fixed;
-      top: 14px;
-      left: 14px;
-      z-index: 10001;
-      display: none;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 0.04em;
-      color: #e6edf8;
-      background: rgba(4, 10, 28, 0.84);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
-      pointer-events: none;
-    }
-    body.desktop-mobile-preview {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      background:
-        radial-gradient(circle at top, rgba(42, 76, 168, 0.22), transparent 36%),
-        linear-gradient(180deg, #07102a 0%, #030816 100%);
-    }
-    body.desktop-mobile-preview .preview-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    body.desktop-mobile-preview .game-wrap {
-      width: min(calc(100vw - 24px), calc((100dvh - 24px) * var(--mobile-landscape-ratio)));
-      height: min(calc(100dvh - 24px), calc((100vw - 24px) / var(--mobile-landscape-ratio)));
-      max-width: 1180px;
-      max-height: 548px;
-      aspect-ratio: var(--mobile-landscape-ratio) / 1;
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.42);
-    }
-    body.desktop-mobile-preview .screen {
-      width: 100%;
-      height: 100%;
-    }
-    body.desktop-mobile-preview .orientation-overlay {
-      position: absolute;
-      inset: 0;
-      border-radius: 28px;
-    }
-
-    @media (max-width: 1180px), (max-height: 620px), (pointer: coarse) {
-      .battle-screen {
-        min-height: 100dvh;
-        height: 100dvh;
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-      }
-      .battle-topbar {
-        padding: clamp(8px, 1.8vh, 12px) clamp(10px, 1.8vw, 16px);
-        gap: clamp(8px, 1vw, 12px);
-      }
-      .status-box {
-        border-radius: 14px;
-        padding: clamp(8px, 1.5vh, 11px) clamp(10px, 1vw, 12px);
-      }
-      .status-name {
-        margin-bottom: 6px;
-        font-size: clamp(13px, 1.8vh, 17px);
-      }
-      .status-line {
-        font-size: clamp(10px, 1.45vh, 13px);
-        margin: 4px 0 3px;
-      }
-      .bar-wrap {
-        height: clamp(10px, 1.7vh, 14px);
-        margin-bottom: 4px;
-      }
-      .battle-field {
-        position: relative;
-        inset: auto;
-        min-height: 0;
-      }
-      .center-ui {
-        top: 4%;
-        gap: 4px;
-      }
-      .turn-counter {
-        padding: 7px 16px;
-        font-size: clamp(14px, 2vh, 20px);
-      }
-      .vs-text {
-        font-size: clamp(18px, 4.2vh, 34px);
-      }
-      .arena {
-        padding: 8px 2vw 10px;
-        align-items: flex-end;
-      }
-      .fighter {
-        width: 40%;
-        max-width: none;
-        height: 94%;
-      }
-      .fighter.player {
-        justify-content: flex-start;
-        padding-left: 1vw;
-      }
-      .fighter.boss {
-        justify-content: flex-end;
-        padding-right: 1vw;
-      }
-      .fighter img {
-        max-width: 100%;
-        max-height: 92%;
-      }
-      .battle-bottom {
-        position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        min-height: 0;
-        padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
-        background: linear-gradient(180deg, rgba(5, 10, 24, 0.18), rgba(5, 10, 24, 0.82));
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 10px;
-        pointer-events: auto;
-      }
-      .cards-panel {
-        flex: 1;
-        min-width: 0;
-        align-items: stretch;
-        gap: 6px;
-      }
-      .cards-title {
-        font-size: clamp(12px, 1.7vh, 16px);
-      }
-      .card-slots {
-        gap: clamp(6px, 1vw, 10px);
-        flex-wrap: nowrap;
-      }
-      .card-slot {
-        width: clamp(72px, 10vw, 104px);
-        height: clamp(84px, 15vh, 124px);
-        padding: 8px 6px;
-        border-radius: 16px;
-      }
-      .card-slot .icon {
-        font-size: clamp(28px, 5vh, 42px);
-        margin-bottom: 6px;
-      }
-      .card-slot .label {
-        font-size: clamp(13px, 1.8vh, 16px);
-      }
-      .card-slot .hint {
-        margin-top: 4px;
-        font-size: clamp(10px, 1.35vh, 12px);
-      }
-      .log-box {
-        width: 100%;
-        height: clamp(44px, 8vh, 68px);
-        padding: 8px 10px;
-        font-size: clamp(11px, 1.45vh, 13px);
-      }
-      .action-panel {
-        position: static;
-        flex: 0 0 clamp(118px, 15vw, 150px);
-        width: clamp(118px, 15vw, 150px);
-        gap: 8px;
-      }
-      .action-btn {
-        min-width: 0;
-        width: 100%;
-        padding: clamp(9px, 1.7vh, 11px) 10px;
-        font-size: clamp(12px, 1.8vh, 15px);
-        border-radius: 12px;
-      }
-      .floating-result {
-        top: 15%;
-        min-width: 150px;
-        padding: 12px 16px;
-      }
-      .floating-result .big {
-        font-size: clamp(24px, 4.8vh, 34px);
-      }
-      .floating-result .small {
-        font-size: clamp(11px, 1.6vh, 14px);
-      }
-      .damage-float {
-        right: 16%;
-        top: 34%;
-        font-size: clamp(20px, 4.5vh, 30px);
-      }
-      .winner-inner {
-        width: min(92vw, 420px);
-        padding: 18px;
-      }
-      .winner-inner h2 {
-        font-size: clamp(22px, 4.2vh, 28px);
-      }
-    }
-
-    @media (max-width: 1180px) and (orientation: landscape), (max-height: 620px) and (orientation: landscape) {
-      .battle-topbar {
-        grid-template-columns: 1fr 1fr;
-      }
-      .select-screen,
-      .leaderboard-screen {
-        padding: 12px;
-      }
-      .select-box,
-      .leaderboard-box {
-        height: 100%;
-        overflow: auto;
-      }
-      .char-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-      }
-      .char-card {
-        padding: 12px;
-      }
-      .char-card img {
-        height: clamp(120px, 27vh, 180px);
-        margin-bottom: 8px;
-      }
-      .char-card h3 {
-        margin: 8px 0;
-        font-size: clamp(15px, 2.4vh, 20px);
-      }
-      .char-card p,
-      .select-title p,
-      .leaderboard-box p,
-      .leader-item {
-        font-size: clamp(11px, 1.75vh, 14px);
-      }
-      .select-title h1,
-      .leaderboard-box h1 {
-        margin: 0 0 8px;
-        font-size: clamp(22px, 4vh, 32px);
-      }
-      .leader-columns {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-</style>
+  </style>
 </head>
 <body>
-  <div class="preview-badge" id="previewBadge">📱 Mobile landscape preview</div>
   <div class="game-wrap">
     <section class="screen select-screen" id="selectScreen">
       <div class="select-box">
@@ -1496,20 +1345,11 @@
       return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     }
 
-    function shouldUseDesktopMobilePreview() {
-      return window.matchMedia('(pointer:fine)').matches && window.innerWidth >= 900;
-    }
-
-    function updateDesktopPreviewMode() {
-      document.body.classList.toggle('desktop-mobile-preview', shouldUseDesktopMobilePreview());
-    }
-
     function updateOrientationOverlay() {
       const overlay = document.getElementById('orientationOverlay');
       if (!overlay) return;
       const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-      const isActualMobile = isMobileDevice() && !window.matchMedia('(pointer:fine)').matches;
-      if (isActualMobile && isPortrait) {
+      if (isMobileDevice() && isPortrait) {
         overlay.classList.add('show-mobile');
       } else {
         overlay.classList.remove('show-mobile');
@@ -1524,24 +1364,16 @@
       } catch (err) {
         console.log('Orientation lock not supported:', err);
       }
-      updateDesktopPreviewMode();
       updateOrientationOverlay();
     }
 
     window.addEventListener('load', () => {
       setupAudio();
       renderLeaderboard();
-      updateDesktopPreviewMode();
       updateOrientationOverlay();
     });
-    window.addEventListener('resize', () => {
-      updateDesktopPreviewMode();
-      updateOrientationOverlay();
-    });
-    window.addEventListener('orientationchange', () => {
-      updateDesktopPreviewMode();
-      updateOrientationOverlay();
-    });
+    window.addEventListener('resize', updateOrientationOverlay);
+    window.addEventListener('orientationchange', updateOrientationOverlay);
   </script>
 </body>
 </html>
