@@ -803,6 +803,45 @@
   }
 }
 
+
+/* === FINAL MOBILE PATCH: LOG POSITION + START SCREEN === */
+
+/* Force chat log to bottom-left on mobile */
+@media (max-width: 900px) {
+  .log-box {
+    position: absolute !important;
+    left: 10px !important;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+    right: auto !important;
+    transform: none !important;
+
+    width: 140px !important;
+    height: 40px !important;
+
+    font-size: 10px !important;
+    padding: 6px 8px !important;
+
+    opacity: 0.35;
+    z-index: 6 !important;
+  }
+}
+
+/* Ensure start screen button stays visible under logo */
+.start-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-logo {
+  max-height: 65dvh;
+}
+
+.start-btn-main {
+  margin-top: 12px;
+}
+
 </style>
 </head>
 <body>
