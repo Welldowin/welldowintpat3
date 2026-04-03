@@ -1356,10 +1356,10 @@
     function usePlayerUltimate() {
       addLog(`✨ ${game.playerName} ใช้ท่าไม้ตายอัตโนมัติ!`);
       if (game.selected === 'swordsman') {
-        game.lastUltimateText = 'พลังฟันต่อเนื่อง 40*2';
-        showFloating('DOUBLE SLASH!', `พลังฟันต่อเนื่อง 40*2`);
+        game.lastUltimateText = 'พลังฟันต่อเนื่อง 30*2';
+        showFloating('DOUBLE SLASH!', `พลังฟันต่อเนื่อง 30*2`);
         for (let i = 1; i <= 2; i++) {
-          const dmg = 40;
+          const dmg = 30;
           game.bossHp = Math.max(0, game.bossHp - dmg);
           addLog(`นักดาบฟันไม้ตายครั้งที่ ${i} ใส่บอส ${dmg} หน่วย`);
           playSfx(AUDIO_PATHS.sfxDoubleSlash, 0.95);
