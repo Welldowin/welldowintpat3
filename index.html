@@ -492,173 +492,235 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      padding: clamp(14px, 2vw, 24px);
       background:
-        linear-gradient(rgba(10, 14, 28, 0.68), rgba(10, 14, 28, 0.78)),
+        linear-gradient(rgba(6, 10, 24, 0.74), rgba(6, 10, 24, 0.84)),
         url('./assets/battle-bg.png') center/cover no-repeat;
+      overflow: hidden;
     }
     .leaderboard-box {
-      width: 100%;
-      max-width: 1080px;
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
+      width: min(1180px, 100%);
+      max-height: calc(100dvh - 28px);
+      padding: clamp(16px, 2vw, 24px);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(9, 15, 34, 0.88), rgba(9, 15, 34, 0.72));
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.38);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .leaderboard-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .leaderboard-header h1 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.15;
+      letter-spacing: 0.3px;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.32);
+    }
+    .leaderboard-header p {
+      margin: 8px 0 0;
+      color: #cbd5e1;
+      font-size: clamp(13px, 1.5vw, 15px);
     }
     .leader-columns {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(12px, 1.5vw, 18px);
+      flex: 1;
+      min-height: 0;
+      align-items: stretch;
     }
     .leader-column {
-      background: rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.10);
       padding: 14px;
-      border-radius: 16px;
-      min-height: 260px;
+      border-radius: 20px;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .leader-column-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .leader-class {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .leader-class-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.26), rgba(255,255,255,0.10));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+      flex-shrink: 0;
+    }
+    .leader-class h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+    .leader-count {
+      font-size: 12px;
+      color: #cbd5e1;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      white-space: nowrap;
+    }
+    .leader-list {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding-right: 4px;
+    }
+    .leader-list::-webkit-scrollbar {
+      width: 8px;
+    }
+    .leader-list::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
     }
     .leader-item {
-      background: rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 10px 12px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 12px;
       margin-bottom: 10px;
     }
-    .leader-empty { opacity: 0.75; text-align: center; margin-top: 24px; }
-    .leader-footer { margin-top: 18px; text-align: center; }
-
-    @media (max-width: 900px) {
-      .select-screen {
-        padding: 8px;
-      }
-      .select-box {
-        max-width: min(1120px, 100%);
-        max-height: calc(100dvh - 16px);
-        padding: 10px;
-        border-radius: 18px;
-      }
-      .select-title {
-        margin-bottom: 10px;
-      }
-      .select-title h1 {
-        font-size: 22px;
-        line-height: 1.15;
-        margin: 0 0 6px;
-      }
-      .select-title p {
-        font-size: 12px;
-        line-height: 1.3;
-        margin: 0;
-      }
-      .char-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 7px;
-      }
-      .char-card {
-        padding: 8px 6px;
-        border-radius: 14px;
-      }
-      .char-card img {
-        max-width: 100px;
-        height: 108px;
-        margin-bottom: 4px;
-      }
-      .char-card h3 {
-        font-size: 16px;
-        line-height: 1.05;
-        margin: 4px 0;
-      }
-      .char-card p {
-        font-size: 10px;
-        line-height: 1.2;
-        margin: 3px 0;
-      }
-      .status-box {
-        top: 10px;
-        width: min(28vw, 156px);
-        padding: 8px 9px;
-        border-radius: 12px;
-      }
-      .status-box.player-panel { left: 10px; }
-      .status-box.boss-panel { right: 10px; }
-      .status-name { font-size: 13px; margin-bottom: 4px; }
-      .status-line { font-size: 10px; margin: 3px 0 2px; }
-      .bar-wrap { height: 8px; margin-bottom: 4px; }
-      .center-ui { top: 8px; gap: 4px; }
-      .turn-counter { font-size: 14px; padding: 6px 12px; }
-      .vs-text { font-size: 24px; }
-      .arena { padding: 70px 15vw 128px; }
-      .fighter {
-        width: min(30vw, 190px);
-        height: min(60dvh, 250px);
-        min-height: 200px;
-      }
-      .battle-bottom {
-        min-height: 122px;
-        padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
-      }
-      .cards-title { font-size: 13px; }
-      .card-slots { gap: 8px; }
-      .card-slot {
-        width: clamp(76px, 18vw, 88px);
-        height: 96px;
-        padding: 6px 4px;
-      }
-      .card-slot .icon { font-size: 30px; margin-bottom: 4px; }
-      .card-slot .label { font-size: 12px; }
-      .card-slot .hint { font-size: 10px; margin-top: 3px; }
-      .action-panel {
-        right: 10px;
-        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-        gap: 8px;
-      }
-      .action-btn {
-        min-width: 108px;
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-      .log-box {
-        left: 10px;
-        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-        width: min(38vw, 280px);
-        height: 48px;
-        font-size: 11px;
-      }
-      .boss-reveal-card {
-        width: clamp(68px, 16vw, 86px);
-        height: clamp(84px, 20vw, 104px);
-      }
-      .boss-reveal-front .boss-mark,
-      .boss-reveal-back .icon {
-        font-size: 28px;
-        margin-bottom: 4px;
-      }
-      .boss-reveal-front .boss-name,
-      .boss-reveal-back .label {
-        font-size: 11px;
-      }
-      .leaderboard-screen { padding: 10px; }
-      .leaderboard-box {
-        width: min(1160px, 100%);
-        height: min(94dvh, 560px);
-        padding: 12px;
-      }
-      .leaderboard-box h1 { font-size: 20px; margin: 0 0 8px; text-align: center; }
-      .leaderboard-box > p { font-size: 12px; margin: 0 0 10px; }
-      .leader-columns {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
-      }
-      .leader-column { padding: 10px; min-height: 0; overflow: auto; }
-      .leader-column h3 { font-size: 14px; margin: 0 0 8px; text-align: center; }
-      .leader-item { font-size: 11px; padding: 7px 8px; }
-      .leader-footer { margin-top: 10px; }
-      .start-logo { width: min(88vw, 620px); }
+    .leader-item:last-child { margin-bottom: 0; }
+    .leader-item.top-1,
+    .leader-item.top-2,
+    .leader-item.top-3 {
+      border-color: rgba(212,175,55,0.28);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+    }
+    .leader-rank {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.10);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .leader-rank-medal {
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+    .leader-rank-number {
+      font-size: 12px;
+      color: #dbe5f3;
+      font-weight: bold;
+    }
+    .leader-meta {
+      min-width: 0;
+    }
+    .leader-name {
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    .leader-sub {
+      font-size: 12px;
+      color: #aab7cf;
+    }
+    .leader-turn {
+      text-align: right;
+      min-width: 76px;
+    }
+    .leader-turn-value {
+      display: block;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1;
+      color: #f8e7a2;
+    }
+    .leader-turn-label {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #cbd5e1;
+      letter-spacing: 0.7px;
+    }
+    .leader-empty {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0.9;
+      text-align: center;
+      color: #cbd5e1;
+      border: 1px dashed rgba(255,255,255,0.16);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      padding: 18px;
+    }
+    .leader-empty .empty-icon {
+      font-size: 26px;
+    }
+    .leader-footer {
+      margin-top: 18px;
+      text-align: center;
+      flex-shrink: 0;
     }
 
-    @media (max-width: 900px) and (orientation: landscape) {
-      .boss-reveal-card {
-        width: clamp(74px, 15vw, 92px);
-        height: clamp(90px, 18vw, 110px);
-      }
+    @media (max-width: 900px) {
+      .char-grid, .leader-columns { grid-template-columns: 1fr; }
+      .battle-topbar { grid-template-columns: 1fr; }
+      .arena { padding: 16px 4vw 220px; }
+      .fighter { width: 40%; height: 60%; }
+      .vs-text { font-size: 28px; }
+      .turn-counter { font-size: 18px; }
+      .card-slot { width: 96px; height: 118px; }
+      .action-panel { right: 12px; bottom: 18px; }
+      .action-btn { min-width: 140px; font-size: 14px; padding: 10px 12px; }
+      .log-box { width: min(560px, 92vw); }
+      .start-logo { width: 260px; }
+      .leaderboard-screen { padding: 12px; }
+      .leaderboard-box { max-height: calc(100dvh - 16px); border-radius: 20px; }
+      .leader-column { max-height: none; }
+      .leader-list { overflow: visible; }
+      .leader-column-head { margin-bottom: 10px; }
+      .leader-item { grid-template-columns: 46px minmax(0, 1fr) auto; gap: 10px; padding: 10px; }
+      .leader-rank { width: 46px; height: 46px; border-radius: 14px; }
+      .leader-turn-value { font-size: 20px; }
+      .leader-name { font-size: 15px; }
     }
 
     .orientation-overlay {
@@ -706,143 +768,7 @@
       }
     }
 
-  
-/* === MOBILE FLOATING RESULT PATCH === */
-@media (max-width: 900px) {
-  .floating-result {
-    top: auto !important;
-    left: 12px !important;
-    bottom: 70px !important;
-    transform: none !important;
-
-    min-width: 120px;
-    padding: 8px 10px;
-
-    background: rgba(8,12,24,0.45);
-    border: 1px solid rgba(255,255,255,0.12);
-    backdrop-filter: blur(6px);
-
-    z-index: 7;
-  }
-
-  .floating-result .big {
-    font-size: 20px !important;
-  }
-
-  .floating-result .small {
-    font-size: 11px !important;
-  }
-}
-
-
-/* === MOBILE CHAT LOG PATCH === */
-@media (max-width: 900px) {
-  .log-box {
-    left: 10px !important;
-    bottom: 10px !important;
-
-    width: 140px !important;
-    height: 40px !important;
-
-    font-size: 10px !important;
-    padding: 6px 8px !important;
-
-    opacity: 0.35;
-  }
-}
-
-
-/* === START SCREEN BUTTON UNDER LOGO PATCH === */
-.start-overlay {
-  padding: 16px;
-}
-
-.start-box {
-  width: min(92vw, 980px);
-  max-height: 92dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.start-logo {
-  width: min(980px, 88vw);
-  max-width: 88vw;
-  max-height: 68dvh;
-  margin: 0 auto 14px;
-}
-
-.start-btn-main {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-@media (max-width: 900px) {
-  .start-overlay {
-    padding: 10px;
-  }
-
-  .start-box {
-    width: min(94vw, 900px);
-    max-height: 94dvh;
-  }
-
-  .start-logo {
-    width: 88vw;
-    max-width: 88vw;
-    max-height: 62dvh;
-    margin: 0 auto 10px;
-  }
-
-  .start-btn-main {
-    font-size: 18px;
-    padding: 10px 28px;
-  }
-}
-
-
-/* === FINAL MOBILE PATCH: LOG POSITION + START SCREEN === */
-
-/* Force chat log to bottom-left on mobile */
-@media (max-width: 900px) {
-  .log-box {
-    position: absolute !important;
-    left: 10px !important;
-    bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
-    right: auto !important;
-    transform: none !important;
-
-    width: 140px !important;
-    height: 40px !important;
-
-    font-size: 10px !important;
-    padding: 6px 8px !important;
-
-    opacity: 0.35;
-    z-index: 6 !important;
-  }
-}
-
-/* Ensure start screen button stays visible under logo */
-.start-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.start-logo {
-  max-height: 65dvh;
-}
-
-.start-btn-main {
-  margin-top: 12px;
-}
-
-</style>
+  </style>
 </head>
 <body>
   <div class="game-wrap">
@@ -872,7 +798,7 @@
             <h3>เซราเฟีย</h3>
             <p>นักบวช : สติปัญญาและพลังศักดิ์สิทธิ์ล้นเหลือ</p>
             <p><strong>ท่าไม้ตาย:</strong> รักษาตัวเองด้วยฮีล</p>
-            <p><strong>Passive:</strong> ลำแสงศักดิ์สิทธิ์ท้ายเทิร์นตามจำนวน Win</p>
+            <p><strong>Passive:</strong> ลำแสงศักดิ์ท้ายเทิร์นตามจำนวน Win</p>
           </div>
         </div>
       </div>
@@ -997,12 +923,41 @@
 
     <section class="screen leaderboard-screen hidden" id="leaderboardScreen">
       <div class="leaderboard-box">
-        <h1>🏆 Leaderboard ผู้พิชิตราชาก็อบลิน</h1>
-        <p style="text-align:center;color:#cbd5e1;">จัดอันดับผู้ที่ชนะด้วยจำนวน TURN น้อยที่สุด แยกตามอาชีพ</p>
+        <div class="leaderboard-header">
+          <h1>🏆 Leaderboard ผู้พิชิตราชาก็อบลิน</h1>
+          <p>จัดอันดับผู้ที่ชนะด้วยจำนวน TURN น้อยที่สุด แยกตามอาชีพ</p>
+        </div>
         <div class="leader-columns">
-          <div class="leader-column"><h3>นักดาบ</h3><div id="leader-swordsman"></div></div>
-          <div class="leader-column"><h3>นักฆ่า</h3><div id="leader-assassin"></div></div>
-          <div class="leader-column"><h3>นักบวช</h3><div id="leader-priest"></div></div>
+          <div class="leader-column">
+            <div class="leader-column-head">
+              <div class="leader-class">
+                <div class="leader-class-icon">⚔️</div>
+                <h3>นักดาบ</h3>
+              </div>
+              <div class="leader-count" id="leader-count-swordsman">0 ผู้พิชิต</div>
+            </div>
+            <div class="leader-list" id="leader-swordsman"></div>
+          </div>
+          <div class="leader-column">
+            <div class="leader-column-head">
+              <div class="leader-class">
+                <div class="leader-class-icon">🗡️</div>
+                <h3>นักฆ่า</h3>
+              </div>
+              <div class="leader-count" id="leader-count-assassin">0 ผู้พิชิต</div>
+            </div>
+            <div class="leader-list" id="leader-assassin"></div>
+          </div>
+          <div class="leader-column">
+            <div class="leader-column-head">
+              <div class="leader-class">
+                <div class="leader-class-icon">✨</div>
+                <h3>นักบวช</h3>
+              </div>
+              <div class="leader-count" id="leader-count-priest">0 ผู้พิชิต</div>
+            </div>
+            <div class="leader-list" id="leader-priest"></div>
+          </div>
         </div>
         <div class="leader-footer"><button class="action-btn surrender-btn" onclick="goBackToSelect()">กลับไปหน้าเลือกตัวละคร</button></div>
       </div>
@@ -1061,7 +1016,6 @@
     let isResolving = false;
 
     const audioState = { bgmSelect: null, bgmBattle: null, loaded: false, unlocked: false };
-    const sfxPrepared = { criticalStrike: null, holyBeam: null };
 
     function createAudio(path, loop = false, volume = 1) {
       const audio = new Audio(path);
@@ -1074,8 +1028,6 @@
       if (audioState.loaded) return;
       audioState.bgmSelect = createAudio(AUDIO_PATHS.bgmSelect, true, 0.35);
       audioState.bgmBattle = createAudio(AUDIO_PATHS.bgmBattle, true, 0.35);
-      sfxPrepared.criticalStrike = createAudio(AUDIO_PATHS.sfxCriticalStrike, false, 1);
-      sfxPrepared.holyBeam = createAudio(AUDIO_PATHS.sfxHolyBeam, false, 0.95);
       audioState.loaded = true;
     }
     function safePlay(audio) { if (audio) audio.play().catch(() => {}); }
@@ -1084,15 +1036,6 @@
       const sfx = new Audio(path);
       sfx.volume = volume;
       sfx.play().catch(() => {});
-    }
-    function playPreparedSfx(audio, volume = 1) {
-      if (!audio) return;
-      try {
-        audio.pause();
-        audio.currentTime = 0;
-        audio.volume = volume;
-        audio.play().catch(() => {});
-      } catch (_) {}
     }
     function playSelectBGM() {
       setupAudio();
@@ -1285,15 +1228,14 @@
 
       const layerRect = layer.getBoundingClientRect();
       const slotRect = slot.getBoundingClientRect();
+      const cardWidth = card.offsetWidth || 120;
       const cardHeight = card.offsetHeight || 140;
       const centerX = slotRect.left - layerRect.left + (slotRect.width / 2);
-      const isMobile = window.matchMedia('(max-width: 900px)').matches;
-      const minTop = isMobile ? 72 : 96;
-      const gapAboveSlot = isMobile ? 34 : 22;
+      const gapAboveSlot = 22;
       const top = slotRect.top - layerRect.top - cardHeight - gapAboveSlot;
 
       card.style.left = `${centerX}px`;
-      card.style.top = `${Math.max(minTop, top)}px`;
+      card.style.top = `${Math.max(96, top)}px`;
     }
 
     async function revealBossCard(slotIndex, bossCard) {
@@ -1356,10 +1298,10 @@
     function usePlayerUltimate() {
       addLog(`✨ ${game.playerName} ใช้ท่าไม้ตายอัตโนมัติ!`);
       if (game.selected === 'swordsman') {
-        game.lastUltimateText = 'พลังฟันต่อเนื่อง 20*2';
-        showFloating('DOUBLE SLASH!', `พลังฟันต่อเนื่อง 20*2`);
+        game.lastUltimateText = 'พลังฟันต่อเนื่อง 40*2';
+        showFloating('DOUBLE SLASH!', `พลังฟันต่อเนื่อง 40*2`);
         for (let i = 1; i <= 2; i++) {
-          const dmg = 20;
+          const dmg = 40;
           game.bossHp = Math.max(0, game.bossHp - dmg);
           addLog(`นักดาบฟันไม้ตายครั้งที่ ${i} ใส่บอส ${dmg} หน่วย`);
           playSfx(AUDIO_PATHS.sfxDoubleSlash, 0.95);
@@ -1412,7 +1354,6 @@
       game.lastUltimateText = 'ไม่มี';
       updateUI();
       playSfx(AUDIO_PATHS.sfxStart, 0.85);
-      await sleep(280);
       resetBossRevealCards();
 
       for (let n = 3; n >= 1; n--) {
@@ -1430,7 +1371,6 @@
         const bossCard = getBossCardForResult(playerCard, result);
         const infoText = `คู่ที่ ${i + 1}: ${CARD_DATA[playerCard].label} vs ${CARD_DATA[bossCard].label}`;
         await revealBossCard(i, bossCard);
-        await sleep(180);
 
         if (result === 'win') {
           winStreak++;
@@ -1440,7 +1380,6 @@
           showFloating('WIN', `${infoText} | -20 | เกจ +10%`);
           addLog(`คู่ที่ ${i + 1}: WIN | บอสโดน 20 | เกจเรา +10%`);
           playSfx(AUDIO_PATHS.sfxBossHit, 0.95);
-          await sleep(420);
 
           if (game.selected === 'assassin') {
             game.normalAttackCount += 1;
@@ -1450,15 +1389,13 @@
               addLog(`🗡️ นักฆ่าคริติคอล! ดาเมจเพิ่ม ${critDamage} หน่วย`);
               game.lastUltimateText = `คริติคอล +${critDamage}`;
               showFloating('CRITICAL STRIKE!', `ดาเมจเพิ่ม ${critDamage}`);
-              await sleep(120);
-              playPreparedSfx(sfxPrepared.criticalStrike, 1);
-              await sleep(720);
+              playSfx(AUDIO_PATHS.sfxCriticalStrike, 1);
+              await sleep(500);
             }
           }
         } else if (result === 'lose') {
           winStreak = 0;
           bossAttackOnLose();
-          await sleep(520);
           addBossGauge(10);
           showFloating('LOSE', `${infoText} | เราโดนโจมตี`);
           addLog(`คู่ที่ ${i + 1}: LOSE | เราแพ้ | บอสได้เกจ +10%`);
@@ -1468,12 +1405,11 @@
           addBossGauge(15);
           showFloating('DRAW', `${infoText} | ทั้งสองฝั่งได้เกจ`);
           addLog(`คู่ที่ ${i + 1}: DRAW | เราได้เกจ +15% และบอสได้เกจ +15%`);
-          await sleep(320);
         }
 
         updateUI();
         checkGameOver();
-        await sleep(1280);
+        await sleep(1200);
       }
 
       if (!game.gameOver) {
@@ -1481,12 +1417,12 @@
           addLog('🔥 COMBO x3! เกจ +100%');
           addPlayerGauge(100);
           showFloating('COMBO x3!', 'เกจ +100%');
-          await sleep(950);
+          await sleep(800);
         } else if (winStreak === 2) {
           addLog('⚡ COMBO x2! เกจ +50%');
           addPlayerGauge(50);
           showFloating('COMBO x2!', 'เกจ +50%');
-          await sleep(850);
+          await sleep(700);
         }
       }
 
@@ -1505,9 +1441,8 @@
             addLog(`✨ ลำแสงศักดิ์สิทธิ์ของนักบวชโจมตี ${beamDamage} หน่วย`);
             game.lastUltimateText = `ลำแสงศักดิ์ ${beamDamage} หน่วย`;
             showFloating('HOLY BEAM!', `ดาเมจ ${beamDamage}`);
-            await sleep(180);
-            playPreparedSfx(sfxPrepared.holyBeam, 0.95);
-            await sleep(760);
+            playSfx(AUDIO_PATHS.sfxHolyBeam, 0.95);
+            await sleep(600);
           }
         }
       }
@@ -1581,16 +1516,33 @@
     }
     function renderLeaderboardColumnFromBoard(board, jobId, containerId) {
       const container = document.getElementById(containerId);
+      const countEl = document.getElementById(`leader-count-${jobId}`);
       const items = board[jobId] || [];
+      const medals = ['🥇', '🥈', '🥉'];
       container.innerHTML = '';
+      if (countEl) countEl.textContent = `${items.length} ผู้พิชิต`;
       if (!items.length) {
-        container.innerHTML = `<div class="leader-empty">ยังไม่มีผู้พิชิต</div>`;
+        container.innerHTML = `<div class="leader-empty"><div class="empty-icon">👑</div><div>ยังไม่มีผู้พิชิต</div><div style="font-size:12px; color:#94a3b8;">รอคนแรกขึ้นบัลลังก์อยู่</div></div>`;
         return;
       }
       items.forEach((item, index) => {
+        const medal = medals[index] || '⚔️';
         const div = document.createElement('div');
-        div.className = 'leader-item';
-        div.innerHTML = `<div><strong>#${index + 1}</strong> ${escapeHtml(item.name)}</div><div>TURN ${item.turn}</div>`;
+        div.className = `leader-item ${index < 3 ? `top-${index + 1}` : ''}`.trim();
+        div.innerHTML = `
+          <div class="leader-rank">
+            <div class="leader-rank-medal">${medal}</div>
+            <div class="leader-rank-number">#${index + 1}</div>
+          </div>
+          <div class="leader-meta">
+            <div class="leader-name">${escapeHtml(item.name)}</div>
+            <div class="leader-sub">ผู้พิชิตราชาก็อบลิน</div>
+          </div>
+          <div class="leader-turn">
+            <span class="leader-turn-value">${item.turn}</span>
+            <span class="leader-turn-label">TURN</span>
+          </div>
+        `;
         container.appendChild(div);
       });
     }
@@ -1632,43 +1584,26 @@
       }
       const input = document.getElementById('playerRecordName');
       const playerName = input.value.trim() || 'Unknown Hero';
-      const payload = {
-        name: playerName,
-        class: game.selected,
-        turn: game.turn
-      };
-      let savedRemote = false;
 
       try {
-        const res = await fetch(API_URL, {
+        await fetch(API_URL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            name: playerName,
+            class: game.selected,
+            turn: game.turn
+          })
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        savedRemote = true;
       } catch (err) {
-        console.error('POST save error:', err);
-        try {
-          const fallbackUrl = `${API_URL}?action=save&name=${encodeURIComponent(payload.name)}&class=${encodeURIComponent(payload.class)}&turn=${encodeURIComponent(payload.turn)}`;
-          const fallbackRes = await fetch(fallbackUrl, { method: 'GET' });
-          if (!fallbackRes.ok) throw new Error(`Fallback HTTP ${fallbackRes.status}`);
-          savedRemote = true;
-        } catch (fallbackErr) {
-          console.error('GET save fallback error:', fallbackErr);
-        }
-      }
-
-      const board = getLeaderboard();
-      board[game.selected].push({ name: playerName, turn: game.turn });
-      board[game.selected].sort((a, b) => a.turn - b.turn);
-      board[game.selected] = board[game.selected].slice(0, 10);
-      saveLeaderboard(board);
-
-      if (!savedRemote) {
-        addLog('บันทึกลงชีตไม่สำเร็จ ระบบเก็บในเครื่องชั่วคราว');
+        console.error('Save error:', err);
+        const board = getLeaderboard();
+        board[game.selected].push({ name: playerName, turn: game.turn });
+        board[game.selected].sort((a, b) => a.turn - b.turn);
+        board[game.selected] = board[game.selected].slice(0, 10);
+        saveLeaderboard(board);
       }
 
       await showLeaderboard();
