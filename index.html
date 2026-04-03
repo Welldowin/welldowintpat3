@@ -488,217 +488,79 @@
     }
     .leader-btn { background: linear-gradient(135deg, #0f766e, #0891b2); color: white; }
 
-    .leaderboard-screen {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(14px, 2vw, 24px);
-      background:
-        linear-gradient(rgba(6, 10, 24, 0.74), rgba(6, 10, 24, 0.84)),
-        url('./assets/battle-bg.png') center/cover no-repeat;
-      overflow: hidden;
-    }
+    
+/* ===== LEADERBOARD SAFE FIX ===== */
+#leaderboardScreen {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 100dvh;
+  background:
+    linear-gradient(rgba(10, 14, 28, 0.7), rgba(10, 14, 28, 0.85)),
+    url('./assets/battle-bg.png') center/cover no-repeat;
+}
+#leaderboardScreen.active { display: flex; }
+
+#leaderboardScreen .leaderboard-box {
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+}
+#leaderboardScreen .leader-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+#leaderboardScreen .leader-column {
+  background: rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 12px;
+}
+#leaderboardScreen .leader-item {
+  background: rgba(0,0,0,0.25);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+@media (max-width: 900px) {
+  #leaderboardScreen .leader-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
     .leaderboard-box {
-      width: min(1180px, 100%);
-      max-height: calc(100dvh - 28px);
-      padding: clamp(16px, 2vw, 24px);
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: linear-gradient(180deg, rgba(9, 15, 34, 0.88), rgba(9, 15, 34, 0.72));
-      backdrop-filter: blur(12px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.38);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .leaderboard-header {
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    .leaderboard-header h1 {
-      margin: 0;
-      font-size: clamp(24px, 3vw, 36px);
-      line-height: 1.15;
-      letter-spacing: 0.3px;
-      text-shadow: 0 6px 18px rgba(0,0,0,0.32);
-    }
-    .leaderboard-header p {
-      margin: 8px 0 0;
-      color: #cbd5e1;
-      font-size: clamp(13px, 1.5vw, 15px);
+      width: 100%;
+      max-width: 1080px;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
     }
     .leader-columns {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(12px, 1.5vw, 18px);
-      flex: 1;
-      min-height: 0;
-      align-items: stretch;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
     }
     .leader-column {
-      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.05));
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 14px;
-      border-radius: 20px;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-    }
-    .leader-column-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .leader-class {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-    .leader-class-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      background: linear-gradient(135deg, rgba(212,175,55,0.26), rgba(255,255,255,0.10));
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.22);
-      flex-shrink: 0;
-    }
-    .leader-class h3 {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.2;
-    }
-    .leader-count {
-      font-size: 12px;
-      color: #cbd5e1;
-      padding: 6px 10px;
-      border-radius: 999px;
       background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-      white-space: nowrap;
-    }
-    .leader-list {
-      flex: 1;
-      min-height: 0;
-      overflow: auto;
-      padding-right: 4px;
-    }
-    .leader-list::-webkit-scrollbar {
-      width: 8px;
-    }
-    .leader-list::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.18);
-      border-radius: 999px;
+      padding: 14px;
+      border-radius: 16px;
+      min-height: 260px;
     }
     .leader-item {
-      position: relative;
-      display: grid;
-      grid-template-columns: 52px minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
       margin-bottom: 10px;
     }
-    .leader-item:last-child { margin-bottom: 0; }
-    .leader-item.top-1,
-    .leader-item.top-2,
-    .leader-item.top-3 {
-      border-color: rgba(212,175,55,0.28);
-      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
-    }
-    .leader-rank {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.10);
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .leader-rank-medal {
-      font-size: 18px;
-      margin-bottom: 3px;
-    }
-    .leader-rank-number {
-      font-size: 12px;
-      color: #dbe5f3;
-      font-weight: bold;
-    }
-    .leader-meta {
-      min-width: 0;
-    }
-    .leader-name {
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 4px;
-    }
-    .leader-sub {
-      font-size: 12px;
-      color: #aab7cf;
-    }
-    .leader-turn {
-      text-align: right;
-      min-width: 76px;
-    }
-    .leader-turn-value {
-      display: block;
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 1;
-      color: #f8e7a2;
-    }
-    .leader-turn-label {
-      display: block;
-      margin-top: 4px;
-      font-size: 11px;
-      color: #cbd5e1;
-      letter-spacing: 0.7px;
-    }
-    .leader-empty {
-      min-height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 8px;
-      opacity: 0.9;
-      text-align: center;
-      color: #cbd5e1;
-      border: 1px dashed rgba(255,255,255,0.16);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      padding: 18px;
-    }
-    .leader-empty .empty-icon {
-      font-size: 26px;
-    }
-    .leader-footer {
-      margin-top: 18px;
-      text-align: center;
-      flex-shrink: 0;
-    }
+    .leader-empty { opacity: 0.75; text-align: center; margin-top: 24px; }
+    .leader-footer { margin-top: 18px; text-align: center; }
 
     @media (max-width: 900px) {
       .char-grid, .leader-columns { grid-template-columns: 1fr; }
@@ -712,15 +574,6 @@
       .action-btn { min-width: 140px; font-size: 14px; padding: 10px 12px; }
       .log-box { width: min(560px, 92vw); }
       .start-logo { width: 260px; }
-      .leaderboard-screen { padding: 12px; }
-      .leaderboard-box { max-height: calc(100dvh - 16px); border-radius: 20px; }
-      .leader-column { max-height: none; }
-      .leader-list { overflow: visible; }
-      .leader-column-head { margin-bottom: 10px; }
-      .leader-item { grid-template-columns: 46px minmax(0, 1fr) auto; gap: 10px; padding: 10px; }
-      .leader-rank { width: 46px; height: 46px; border-radius: 14px; }
-      .leader-turn-value { font-size: 20px; }
-      .leader-name { font-size: 15px; }
     }
 
     .orientation-overlay {
@@ -923,41 +776,12 @@
 
     <section class="screen leaderboard-screen hidden" id="leaderboardScreen">
       <div class="leaderboard-box">
-        <div class="leaderboard-header">
-          <h1>🏆 Leaderboard ผู้พิชิตราชาก็อบลิน</h1>
-          <p>จัดอันดับผู้ที่ชนะด้วยจำนวน TURN น้อยที่สุด แยกตามอาชีพ</p>
-        </div>
+        <h1>🏆 Leaderboard ผู้พิชิตราชาก็อบลิน</h1>
+        <p style="text-align:center;color:#cbd5e1;">จัดอันดับผู้ที่ชนะด้วยจำนวน TURN น้อยที่สุด แยกตามอาชีพ</p>
         <div class="leader-columns">
-          <div class="leader-column">
-            <div class="leader-column-head">
-              <div class="leader-class">
-                <div class="leader-class-icon">⚔️</div>
-                <h3>นักดาบ</h3>
-              </div>
-              <div class="leader-count" id="leader-count-swordsman">0 ผู้พิชิต</div>
-            </div>
-            <div class="leader-list" id="leader-swordsman"></div>
-          </div>
-          <div class="leader-column">
-            <div class="leader-column-head">
-              <div class="leader-class">
-                <div class="leader-class-icon">🗡️</div>
-                <h3>นักฆ่า</h3>
-              </div>
-              <div class="leader-count" id="leader-count-assassin">0 ผู้พิชิต</div>
-            </div>
-            <div class="leader-list" id="leader-assassin"></div>
-          </div>
-          <div class="leader-column">
-            <div class="leader-column-head">
-              <div class="leader-class">
-                <div class="leader-class-icon">✨</div>
-                <h3>นักบวช</h3>
-              </div>
-              <div class="leader-count" id="leader-count-priest">0 ผู้พิชิต</div>
-            </div>
-            <div class="leader-list" id="leader-priest"></div>
-          </div>
+          <div class="leader-column"><h3>นักดาบ</h3><div id="leader-swordsman"></div></div>
+          <div class="leader-column"><h3>นักฆ่า</h3><div id="leader-assassin"></div></div>
+          <div class="leader-column"><h3>นักบวช</h3><div id="leader-priest"></div></div>
         </div>
         <div class="leader-footer"><button class="action-btn surrender-btn" onclick="goBackToSelect()">กลับไปหน้าเลือกตัวละคร</button></div>
       </div>
@@ -1516,33 +1340,16 @@
     }
     function renderLeaderboardColumnFromBoard(board, jobId, containerId) {
       const container = document.getElementById(containerId);
-      const countEl = document.getElementById(`leader-count-${jobId}`);
       const items = board[jobId] || [];
-      const medals = ['🥇', '🥈', '🥉'];
       container.innerHTML = '';
-      if (countEl) countEl.textContent = `${items.length} ผู้พิชิต`;
       if (!items.length) {
-        container.innerHTML = `<div class="leader-empty"><div class="empty-icon">👑</div><div>ยังไม่มีผู้พิชิต</div><div style="font-size:12px; color:#94a3b8;">รอคนแรกขึ้นบัลลังก์อยู่</div></div>`;
+        container.innerHTML = `<div class="leader-empty">ยังไม่มีผู้พิชิต</div>`;
         return;
       }
       items.forEach((item, index) => {
-        const medal = medals[index] || '⚔️';
         const div = document.createElement('div');
-        div.className = `leader-item ${index < 3 ? `top-${index + 1}` : ''}`.trim();
-        div.innerHTML = `
-          <div class="leader-rank">
-            <div class="leader-rank-medal">${medal}</div>
-            <div class="leader-rank-number">#${index + 1}</div>
-          </div>
-          <div class="leader-meta">
-            <div class="leader-name">${escapeHtml(item.name)}</div>
-            <div class="leader-sub">ผู้พิชิตราชาก็อบลิน</div>
-          </div>
-          <div class="leader-turn">
-            <span class="leader-turn-value">${item.turn}</span>
-            <span class="leader-turn-label">TURN</span>
-          </div>
-        `;
+        div.className = 'leader-item';
+        div.innerHTML = `<div><strong>#${index + 1}</strong> ${escapeHtml(item.name)}</div><div>TURN ${item.turn}</div>`;
         container.appendChild(div);
       });
     }
