@@ -494,125 +494,36 @@
       align-items: center;
       padding: 24px;
       background:
-        linear-gradient(rgba(8, 12, 28, 0.72), rgba(8, 12, 28, 0.84)),
-        radial-gradient(circle at top center, rgba(212,175,55,0.10), transparent 42%),
+        linear-gradient(rgba(10, 14, 28, 0.68), rgba(10, 14, 28, 0.78)),
         url('./assets/battle-bg.png') center/cover no-repeat;
     }
     .leaderboard-box {
       width: 100%;
-      max-width: 1100px;
-      background: linear-gradient(180deg, rgba(13,19,41,0.88), rgba(8,12,28,0.92));
-      padding: 22px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.10);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.38);
-    }
-    .leaderboard-box h1 {
-      margin: 0 0 8px;
-      text-align: center;
-      font-size: 34px;
-      letter-spacing: 0.4px;
-      color: #fff4d6;
-      text-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    }
-    .leaderboard-box > p {
-      margin: 0 0 18px;
-      text-align: center;
-      color: #cdd6e7 !important;
-      font-size: 14px;
+      max-width: 1080px;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
     }
     .leader-columns {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
     }
     .leader-column {
-      position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
-      padding: 16px 14px 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.10);
-      min-height: 300px;
-      overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-    }
-    .leader-column::before {
-      content: '';
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 4px;
-      background: linear-gradient(90deg, #8f6b1f, #d4af37, #8f6b1f);
-      opacity: 0.95;
-    }
-    .leader-column h3 {
-      margin: 4px 0 14px;
-      text-align: center;
-      font-size: 20px;
-      color: #fff1c2;
+      background: rgba(255,255,255,0.08);
+      padding: 14px;
+      border-radius: 16px;
+      min-height: 260px;
     }
     .leader-item {
-      display: grid;
-      grid-template-columns: 34px 1fr auto;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
       padding: 10px 12px;
       margin-bottom: 10px;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
     }
-    .leader-item .rank-badge {
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #8f6b1f, #d4af37);
-      color: #111827;
-      font-weight: bold;
-      font-size: 14px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.22);
-    }
-    .leader-item .player-meta {
-      min-width: 0;
-    }
-    .leader-item .player-name {
-      font-weight: bold;
-      color: #ffffff;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .leader-item .player-sub {
-      margin-top: 2px;
-      font-size: 12px;
-      color: #b9c5dc;
-    }
-    .leader-item .turn-pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(14, 165, 233, 0.14);
-      border: 1px solid rgba(56, 189, 248, 0.22);
-      color: #dff6ff;
-      font-size: 12px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-    .leader-empty {
-      opacity: 0.78;
-      text-align: center;
-      margin-top: 30px;
-      color: #d8e0ee;
-      font-size: 14px;
-    }
-    .leader-footer {
-      margin-top: 18px;
-      text-align: center;
-    }
+    .leader-empty { opacity: 0.75; text-align: center; margin-top: 24px; }
+    .leader-footer { margin-top: 18px; text-align: center; }
 
     @media (max-width: 900px) {
       .select-screen {
@@ -738,24 +649,7 @@
       }
       .leader-column { padding: 10px; min-height: 0; overflow: auto; }
       .leader-column h3 { font-size: 14px; margin: 0 0 8px; text-align: center; }
-      .leader-item {
-        grid-template-columns: 28px 1fr;
-        gap: 8px;
-        padding: 8px;
-      }
-      .leader-item .rank-badge {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-      }
-      .leader-item .player-name { font-size: 11px; }
-      .leader-item .player-sub,
-      .leader-item .turn-pill { font-size: 10px; }
-      .leader-item .turn-pill {
-        grid-column: 1 / -1;
-        justify-self: start;
-        margin-left: 36px;
-      }
+      .leader-item { font-size: 11px; padding: 7px 8px; }
       .leader-footer { margin-top: 10px; }
       .start-logo { width: min(88vw, 620px); }
     }
@@ -1462,10 +1356,10 @@
     function usePlayerUltimate() {
       addLog(`✨ ${game.playerName} ใช้ท่าไม้ตายอัตโนมัติ!`);
       if (game.selected === 'swordsman') {
-        game.lastUltimateText = 'พลังฟันต่อเนื่อง 30*2';
-        showFloating('DOUBLE SLASH!', `พลังฟันต่อเนื่อง 30*2`);
+        game.lastUltimateText = 'พลังฟันต่อเนื่อง 40*2';
+        showFloating('DOUBLE SLASH!', `พลังฟันต่อเนื่อง 40*2`);
         for (let i = 1; i <= 2; i++) {
-          const dmg = 30;
+          const dmg = 40;
           game.bossHp = Math.max(0, game.bossHp - dmg);
           addLog(`นักดาบฟันไม้ตายครั้งที่ ${i} ใส่บอส ${dmg} หน่วย`);
           playSfx(AUDIO_PATHS.sfxDoubleSlash, 0.95);
@@ -1716,31 +1610,14 @@
       return board;
     }
     async function renderLeaderboard() {
-      const localBoard = getLeaderboard();
-      const containers = {
-        swordsman: document.getElementById('leader-swordsman'),
-        assassin: document.getElementById('leader-assassin'),
-        priest: document.getElementById('leader-priest')
-      };
-
-      Object.entries(containers).forEach(([key, container]) => {
-        const items = localBoard[key] || [];
-        if (!items.length) {
-          container.innerHTML = '<div class="leader-empty">ยังไม่มีผู้พิชิต</div>';
-          return;
-        }
-        container.innerHTML = items.map((entry, idx) => `
-          <div class="leader-item">
-            <div class="rank-badge">#${idx + 1}</div>
-            <div class="player-meta">
-              <div class="player-name">${escapeHtml(entry.name || 'Unknown Hero')}</div>
-              <div class="player-sub">ผู้พิชิตลำดับ ${idx + 1}</div>
-            </div>
-            <div class="turn-pill">${entry.turn} TURN</div>
-          </div>
-        `).join('');
-      });
-    } catch (err) {
+      try {
+        const res = await fetch(API_URL, { method: 'GET' });
+        const rows = await res.json();
+        const board = normalizeLeaderboardRows(Array.isArray(rows) ? rows : []);
+        renderLeaderboardColumnFromBoard(board, 'swordsman', 'leader-swordsman');
+        renderLeaderboardColumnFromBoard(board, 'assassin', 'leader-assassin');
+        renderLeaderboardColumnFromBoard(board, 'priest', 'leader-priest');
+      } catch (err) {
         console.error('Leaderboard load error:', err);
         const board = getLeaderboard();
         renderLeaderboardColumnFromBoard(board, 'swordsman', 'leader-swordsman');
