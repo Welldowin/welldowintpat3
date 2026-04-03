@@ -842,6 +842,68 @@
   margin-top: 12px;
 }
 
+
+/* === LEADERBOARD FULLSCREEN MOBILE PATCH === */
+.leaderboard-screen {
+  overflow: hidden;
+}
+
+.leaderboard-box {
+  height: min(92dvh, 680px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.leader-columns {
+  flex: 1;
+  min-height: 0;
+}
+
+.leader-column {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 900px) {
+  .leaderboard-screen {
+    align-items: stretch !important;
+    padding: 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .leaderboard-box {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    padding: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: visible !important;
+  }
+
+  .leader-columns {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .leader-column {
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .leader-footer {
+    margin-top: 12px !important;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1503,7 +1565,7 @@
           if (beamDamage > 0) {
             game.bossHp = Math.max(0, game.bossHp - beamDamage);
             addLog(`✨ ลำแสงศักดิ์สิทธิ์ของนักบวชโจมตี ${beamDamage} หน่วย`);
-            game.lastUltimateText = `ลำแสงศักดิ์ ${beamDamage} หน่วย`;
+            game.lastUltimateText = `ลำแสงศักดิ์สิทธิ์ ${beamDamage} หน่วย`;
             showFloating('HOLY BEAM!', `ดาเมจ ${beamDamage}`);
             await sleep(180);
             playPreparedSfx(sfxPrepared.holyBeam, 0.95);
